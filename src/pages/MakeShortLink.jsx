@@ -214,7 +214,9 @@ function MakeShortLink() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm>
                   <div>
-                    <div style={{ fontWeight: 'bold', wordWrap: 'break-word' }}>link.ly/{item.customLink}</div>
+                    <div style={{ fontWeight: 'bold', wordWrap: 'break-word' }}>
+                      first-program.vercel.app/{item.customLink}
+                    </div>
                     <div style={{ wordWrap: 'break-word', fontSize: '14px' }}>Direct To : {item.rawLink}</div>
                   </div>
                 </Grid>

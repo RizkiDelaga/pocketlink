@@ -57,7 +57,7 @@ function App() {
           <Route path="Register" element={<Register/>}/>
         </Route>
 
-        <Route path="/ShortLink" element={<MakeShortLink />}/>
+        <Route path="ShortLink" element={<MakeShortLink />}/>
         <Route path="QRCode" element={<QRCode/>}/>
 
         <Route path="m/*" element={<HomePage/>}/>

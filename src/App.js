@@ -7,6 +7,9 @@ import MakeShortLink from "./pages/MakeShortLink";
 import QRCode from "./pages/QRCode";
 import axios from "axios";
 import { BrowserRouter } from 'react-router-dom';
+import LinkPage from './pages/LinkPage';
+
+import Appsx from './pages/Appsx';
 
 function App() {
 
@@ -59,6 +62,8 @@ function App() {
 
         <Route path="ShortLink" element={<MakeShortLink />}/>
         <Route path="QRCode" element={<QRCode/>}/>
+        <Route path="LinkPage" element={<LinkPage/>}/>
+        <Route path="Appsx" element={<Appsx/>}/>
 
         <Route path="m/*" element={<HomePage/>}/>
         <Route path="*" element={<ShortLink/>}/>

@@ -56,13 +56,19 @@ function HomePage() {
           >
             Make Short Link
           </button>
-
           <button
             onClick={() => {
               navigate('/QRCode');
             }}
           >
             Make QR Code
+          </button>
+          <button
+            onClick={() => {
+              navigate('/LinkPage');
+            }}
+          >
+            Make Link Page
           </button>
           <button
             onClick={() => {

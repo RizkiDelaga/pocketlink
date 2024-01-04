@@ -1,16 +1,9 @@
-import { Box, Button, Container, Grid, TextField, Typography } from '@mui/material';
-import axios from 'axios';
+import { Box, Button, Container, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import ChooseDesignPattern from '../components/ChooseDesignPattern/ChooseDesignPattern';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
 
-// import required modules
-import { Navigation } from 'swiper/modules';
-import { AlphaPicker, HuePicker, SketchPicker, SliderPicker } from 'react-color';
 
 export default function LinkPage() {
   const theme = useTheme();
@@ -341,7 +334,7 @@ export default function LinkPage() {
         </Grid>
       </Container>
 
-      <ChooseDesignPattern />
+      <ChooseDesignPattern data={data} setData={setData} />
 
       <div>{data.title}</div>
       <div>{data.description}</div>
@@ -349,137 +342,3 @@ export default function LinkPage() {
   );
 }
 
-export function ChooseDesignPattern() {
-  const [schemeColor, setSchemeColor] = useState('#ffffff');
-  const [fontColor, setFontColor] = useState('#000000');
-  return (
-    <div>
-      <Container fluid>
-        <h1>Choose Design Pattern</h1>
-        <Grid container spacing={2}>
-          <Grid item sm="6">
-            <h3>Scheme Color</h3>
-            <HuePicker
-              width="100%"
-              color={schemeColor}
-              onChange={(color) => {
-                setSchemeColor(color.hex);
-                // console.log(color);
-              }}
-            />
-            <h3 style={{ color: schemeColor }}>{schemeColor}</h3>
-          </Grid>
-          <Grid item sm="6">
-            <h3>Font Color</h3>
-            <HuePicker
-              width="100%"
-              color={fontColor}
-              onChange={(color) => {
-                setFontColor(color.hex);
-              }}
-            />
-
-            <h3 style={{ color: fontColor }}>{fontColor}</h3>
-          </Grid>
-        </Grid>
-
-        <h3>Scheme</h3>
-        <Swiper
-          navigation={true}
-          slidesPerView={1}
-          spaceBetween={10}
-          breakpoints={{
-            0: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            500: {
-              slidesPerView: 3,
-              spaceBetween: 15,
-            },
-            660: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            950: {
-              slidesPerView: 6,
-              spaceBetween: 20,
-            },
-          }}
-          modules={[Navigation]}
-          className="mySwiper"
-        >
-          {[1, 2, 3, 4].map((item) => {
-            return (
-              <SwiperSlide>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '80px',
-                    margin: '4px',
-                    border: '1px #111 solid',
-                    boxShadow: '0px 0px 8px -2px rgba(0,0,0,0.75)',
-                    borderRadius: '4px',
-                  }}
-                >
-                  Scheme {item}
-                </Box>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-
-        <h3>Font Family</h3>
-        <p>Modern Style</p>
-        <Swiper
-          navigation={true}
-          slidesPerView={1}
-          spaceBetween={10}
-          breakpoints={{
-            0: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            500: {
-              slidesPerView: 3,
-              spaceBetween: 15,
-            },
-            660: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            950: {
-              slidesPerView: 6,
-              spaceBetween: 20,
-            },
-          }}
-          modules={[Navigation]}
-          className="mySwiper"
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => {
-            return (
-              <SwiperSlide>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '80px',
-                    margin: '4px',
-                    border: '1px #111 solid',
-                    boxShadow: '0px 0px 8px -2px rgba(0,0,0,0.75)',
-                    borderRadius: '4px',
-                  }}
-                >
-                  Font Family {item}
-                </Box>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </Container>
-    </div>
-  );
-}

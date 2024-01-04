@@ -1,3 +1,23 @@
 #about::-webkit-scrollbar {
     display: none !important;
+
+}
+
+
+/* Custom Swiper JS styles for the next button */
+.swiper-wrapper {
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    --swiper-theme-color: #FE6D6D !important;
+    --swiper-navigation-size: 24px !important;
+}
+
+
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: 0 !important;
 }

@@ -10,31 +10,29 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 function QRCode() {
   const [qrcodeValue, setQrcodeValue] = useState({ id: 0, value: '' });
+
   const downloadQRCode = () => {
     const customSize = 400; // Set your custom size here
     const marginSize = 50; // Set your desired margin size here
-  
+
     // Create a hidden canvas with a custom size and margin
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     canvas.width = customSize + 2 * marginSize;
     canvas.height = customSize + 2 * marginSize;
-  
-    // Create a QR code component with your URL
-    const url = 'https://example.com'; // Replace with your URL
-    const qrCodeComponent = <QRCode value={url} size={customSize} />;
-  
-    // Render the QR code component to an image
+
+    // Draw the QR code on the hidden canvas with margins
+    const qrCodeDataUrl = document.querySelector('canvas').toDataURL('image/png');
     const qrCodeImage = new Image();
-    qrCodeImage.src = `data:image/svg+xml;base64,${btoa(new XMLSerializer().serializeToString(qrCodeComponent))}`;
+    qrCodeImage.src = qrCodeDataUrl;
     qrCodeImage.onload = () => {
       context.fillStyle = '#ffffff'; // Set the margin background color (white in this case)
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.drawImage(qrCodeImage, marginSize, marginSize, customSize, customSize);
-  
+
       // Convert the hidden canvas to a data URL
       const customSizeDataUrl = canvas.toDataURL('image/png');
-  
+
       // Create a download link
       const downloadLink = document.createElement('a');
       downloadLink.href = customSizeDataUrl;

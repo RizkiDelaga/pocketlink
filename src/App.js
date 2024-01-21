@@ -1,15 +1,17 @@
 // import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/Home";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
-import MakeShortLink from "./pages/MakeShortLink";
-import QRCode from "./pages/QRCode";
+import QRCode from "./pages/dashboard/QRCode/QRCode";
 import axios from "axios";
 import { BrowserRouter } from 'react-router-dom';
-import LinkPage from './pages/LinkPage';
+import CreateLinkPage from './pages/dashboard/LinkPage/CreateLinkPage';
+import ShortLink from './pages/dashboard/ShortLink/ShortLink';
+import Dashboard from './pages/dashboard/Dashboard';
+import PageViewer from './pages/PageViewer/PageViewer';
+import MainLayout from './layout/MainLayout';
 
-import Appsx from './pages/Appsx';
 
 function App() {
 
@@ -21,10 +23,10 @@ function App() {
   }
 
 
-  const ShortLink =  () =>{
+  const DirectShortLink =  () =>{
     const location = useLocation();    
 
-    searchShortLink(location.pathname.split("/").join(""))
+    SearchShortLink(location.pathname.split("/").join(""))
     .then(result => {
       window.location.href = result
       return null
@@ -35,7 +37,7 @@ function App() {
     });
   }
 
-  const searchShortLink = async (path) => {
+  const SearchShortLink = async (path) => {
     try {
       const res = await axios({
         method: 'GET',
@@ -55,18 +57,25 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="" element={<HomePage/>}/>
-        <Route element={<HandleLoginSuccessfully />}>
+        {/* <Route element={<HandleLoginSuccessfully />}>
+        </Route> */}
           <Route path="Login" element={<Login/>}/>
           <Route path="Register" element={<Register/>}/>
+          <Route path="LoginProcess/:Token" element={"Login Process"}/>
+          
+
+        <Route element={<MainLayout />}>
+          <Route path="Dashboard" element={<Dashboard />}/>
+          <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
+          <Route path="Dashboard/QRCode" element={<QRCode/>}/>
+          <Route path="Dashboard/LinkPage" element={<CreateLinkPage/>}/>
+          <Route path="Dashboard/LinkPage/Create" element={"Create Page"}/>
+          <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
         </Route>
+        
 
-        <Route path="ShortLink" element={<MakeShortLink />}/>
-        <Route path="QRCode" element={<QRCode/>}/>
-        <Route path="LinkPage" element={<LinkPage/>}/>
-        <Route path="Appsx" element={<Appsx/>}/>
-
-        <Route path="m/*" element={<HomePage/>}/>
-        <Route path="*" element={<ShortLink/>}/>
+        <Route path="m/*" element={<PageViewer/>}/>
+        <Route path="*" element={<DirectShortLink/>}/>
         
       </Routes>
     </BrowserRouter>
@@ -74,3 +83,13 @@ function App() {
 }
 
 export default App;
+
+
+// To-Do
+// 1. Make Layout
+// 2. Slicing All Page
+// 3. Coloring Theme
+// 4. Page 404
+// 5. Awevers Project (Next JS)
+
+

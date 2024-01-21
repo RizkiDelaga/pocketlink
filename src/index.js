@@ -3,19 +3,44 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { Button, Paper, ThemeProvider, createTheme } from '@mui/material';
 
 const theme = createTheme({
   palette: {
+    mode: 'light',
     primary: {
-      main: '#FE6D6D',
+      main: '#4CAF50',
     },
-    background: {
-      light: '#f5f5f5',
-      main: '#eeeeee',
-    },
-    neutral: {
-      main: '#ffffff',
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          // Default styles
+          borderWidth: '2px',
+          borderColor: 'theme.palette.primary.main',
+
+          // Hover styles
+          '&:hover': {
+            borderWidth: '2px',
+            borderColor: 'theme.palette.primary.main',
+          },
+
+          // Active styles
+          '&:active': {
+            borderWidth: '2px',
+            borderColor: 'theme.palette.primary.main',
+          },
+
+          // Focus styles
+          '&:focus': {
+            borderWidth: '2px',
+            borderColor: 'theme.palette.primary.main',
+          },
+
+          // Add other styles as needed
+        },
+      },
     },
   },
 });
@@ -24,7 +49,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <ThemeProvider theme={theme} >
-    <App />
+    {/* <Paper sx={{width: '100%', height: '100%'}}> */}
+      <App />
+    {/* </Paper> */}
   </ThemeProvider>
   // </React.StrictMode>
 );

@@ -1,11 +1,9 @@
 import { Box, Button, Container, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
-import ChooseDesignPattern from '../components/ChooseDesignPattern/ChooseDesignPattern';
+import ChooseDesignPattern from '../../../components/ChooseDesignPattern/ChooseDesignPattern';
 
-
-
-export default function LinkPage() {
+export default function CreateLinkPage() {
   const theme = useTheme();
   const [data, setData] = useState({
     id: 0,
@@ -341,4 +339,3 @@ export default function LinkPage() {
     </>
   );
 }
-

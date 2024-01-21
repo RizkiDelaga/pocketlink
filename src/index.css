@@ -1,3 +1,15 @@
+body {
+    margin: 0;
+}
+
+/* ========= LINK ======== */
+
+.disable-link-style {
+    color: #000000 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+  }
+
 #about::-webkit-scrollbar {
     display: none !important;
 

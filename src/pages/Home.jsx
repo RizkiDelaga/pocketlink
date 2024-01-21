@@ -36,7 +36,7 @@ function HomePage() {
   // };
 
   return (
-    <Fragment>
+    <>
       {/* <QRCodeCanvas
         value={'https://picturesofpeoplescanningqrcodes.tumblr.com'}
         size={250}
@@ -47,7 +47,7 @@ function HomePage() {
       />
       <button onClick={downloadQRCode}>Download QR Code</button> */}
 
-      {localStorage.getItem('accessToken') ? (
+      {/* {localStorage.getItem('accessToken') ? (
         <>
           <button
             onClick={() => {
@@ -97,8 +97,16 @@ function HomePage() {
             Register
           </button>
         </>
-      )}
-    </Fragment>
+      )} */}
+
+      <button
+        onClick={() => {
+          navigate('Dashboard');
+        }}
+      >
+        Dashboard
+      </button>
+    </>
   );
 }
 

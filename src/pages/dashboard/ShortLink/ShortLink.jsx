@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
 
-function MakeShortLink() {
+export default function ShortLink() {
   const [listShortLink, setListShortLink] = useState([]);
   const [formCreateShortLink, setFormCreateShortLink] = useState({
     id: null,
@@ -304,5 +304,3 @@ function MakeShortLink() {
     </Fragment>
   );
 }
-
-export default MakeShortLink;

@@ -1,0 +1,53 @@
+{
+  "id": 1,
+  "userID": "36125912321",
+  "title": "Ini Title",
+  "profileImage": "Base64",
+  "description": "Ini Description",
+  "backgroundImage": "Base64",
+  "designPattern": {
+    "scheme": "a",
+    "color": "red",
+    "textColor": "black",
+    "fontFamily": "vendetta"
+  },
+  "listOfLinks": [{
+      "title": "Ini Title 1",
+      "description": "Ini Description",
+      "image": "Base64",
+      "directLink": "https://example.com/",
+      "designPattern": {
+        "shape": "bubbleA",
+        "shapeColor": "white",
+        "shadow": "1d",
+        "textColor": "black",
+        "fontFamily": "vendetta"
+      }
+    },
+    {
+      "title": "Ini Title 2",
+      "description": "Ini Description",
+      "image": "Base64",
+      "directLink": "https://example.com/",
+      "designPattern": {
+        "shape": "bubbleA",
+        "shapeColor": "white",
+        "shadow": "1d",
+        "textColor": "black",
+        "fontFamily": "vendetta"
+      }
+    }
+  ],
+  "socialMedia": {
+    "facebook": "https://example.com/",
+    "instagram": "https://example.com/",
+    "youtube": "https://example.com/",
+    "tiktok": "https://example.com/",
+    "twitter": "https://example.com/",
+    "linkedin": "https://example.com/",
+    "designPattern": {
+      "iconStyle": "",
+      "Placement":""
+    }
+  }
+}

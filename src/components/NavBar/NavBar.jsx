@@ -1,18 +1,15 @@
-import { Avatar, Divider, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import { Avatar, Divider, IconButton, Menu, MenuItem, Switch, Toolbar } from '@mui/material';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItemIcon from '@mui/material/ListItemIcon';
-
 import { useNavigate } from 'react-router-dom';
-
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PasswordIcon from '@mui/icons-material/Password';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ThemeModeContext from '../../provider/contexts/ThemeMode';
 
 const drawerWidth = 300;
 
@@ -38,7 +35,7 @@ const AppBar = styled(MuiAppBar, {
 
 export default function NavBar(props) {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const { themeMode, toggleThemeMode } = useContext(ThemeModeContext);
 
   // Open Account Menu
   const [openMyAccount, setOpenMyAccount] = React.useState(false);
@@ -62,15 +59,16 @@ export default function NavBar(props) {
               sx={{
                 marginRight: 1,
                 marginLeft: props.openSidebar ? 'none' : 6,
-                [theme.breakpoints.down('md')]: {
-                  marginLeft: '0 !important',
-                },
+                // [theme.breakpoints.down('md')]: {
+                //   marginLeft: '0 !important',
+                // },
               }}
               className="color-primary"
             >
               <MenuIcon />
             </IconButton>
           </div>
+          <Switch onChange={toggleThemeMode} />
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* Account Menu */}
             <IconButton

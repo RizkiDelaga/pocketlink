@@ -1,18 +1,11 @@
 import { Box, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
-
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Link, useNavigate } from 'react-router-dom';
-
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
-import StoreMallDirectoryOutlinedIcon from '@mui/icons-material/StoreMallDirectoryOutlined';
-import LocalActivityOutlinedIcon from '@mui/icons-material/LocalActivityOutlined';
-import LocalAtmOutlinedIcon from '@mui/icons-material/LocalAtmOutlined';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-
 import CloseIcon from '@mui/icons-material/Close';
 
 const drawerWidth = 300;

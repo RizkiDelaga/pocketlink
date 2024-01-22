@@ -1,5 +1,5 @@
 import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
-import HomePage from "./pages/Home";
+import Home from "./pages/Home";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import QRCode from "./pages/dashboard/QRCode/QRCode";
@@ -14,6 +14,7 @@ import ThemeModeComponent from './provider/components/ThemeModeComponent';
 import ThemeProviderComponent from './provider/components/ThemeProviderComponent';
 import PageNotFound404 from './pages/PageNotFound404';
 import LinkPage from './pages/dashboard/LinkPage/LinkPage';
+import Quill from './pages/Quill';
 
 function App() {
   const HandleLoginSuccessfully = () => {
@@ -61,12 +62,14 @@ function App() {
       <ThemeProviderComponent>
         <BrowserRouter>
           <Routes>
-            <Route path="" element={<HomePage/>}/>
             {/* <Route element={<HandleLoginSuccessfully />}>
             </Route> */}
+            <Route path="" element={<Home />}/>
               <Route path="Login" element={<Login/>}/>
               <Route path="Register" element={<Register/>}/>
               <Route path="LoginProcess/:Token" element={"Login Process"}/>
+              <Route path="Quill" element={<Quill />}/>
+              
               
             <Route element={<MainLayout />}>
               <Route path="Dashboard" element={<Dashboard />}/>

@@ -76,7 +76,7 @@ export default function CreateLinkPage() {
         <Grid item xs="12" md="7" lg="8" xl="8">
           {/* Main Design Section */}
           <Paper elevation={0} sx={{ p: 2 }}>
-            <h3 style={{ margin: 0 }}>Main Design</h3>
+            <h3 style={{ margin: 0 }}>Create Link Page</h3>
             <Grid container spacing="2">
               <Grid item xs="12" lg="6">
                 <Typography sx={{ mt: 2, mb: 1 }}>Profile Picture</Typography>
@@ -202,7 +202,7 @@ export default function CreateLinkPage() {
             />
             <div style={{ display: 'flex', justifyContent: 'end', marginTop: '32px' }}>
               <Button variant="contained" size="large" type="submit" sx={{ fontWeight: 'bold' }}>
-                Choose Design Pattern
+                Choose Main Design
               </Button>
             </div>
           </Paper>

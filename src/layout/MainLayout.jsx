@@ -17,7 +17,6 @@ export default function MainLayout() {
     <>
       <CssBaseline />
       <NavBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
-
       <SideBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
 
       <Box

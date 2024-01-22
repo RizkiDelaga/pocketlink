@@ -1,4 +1,4 @@
-import { Box, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material';
 import React, { createContext, useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
@@ -7,6 +7,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LinkIcon from '@mui/icons-material/Link';
+import QrCode2Icon from '@mui/icons-material/QrCode2';
+import ViewDayIcon from '@mui/icons-material/ViewDay';
 
 const drawerWidth = 300;
 
@@ -82,6 +86,7 @@ export default function SideBar(props) {
               position: 'absolute',
               right: 0,
               marginRight: 1,
+              color: 'primary.main',
               [theme.breakpoints.up('md')]: {
                 display: 'none',
               },
@@ -90,19 +95,26 @@ export default function SideBar(props) {
             <CloseIcon />
           </IconButton>
         </DrawerHeader>
-        <List>
+        <Divider variant="middle" />
+        <List sx={{ p: 0 }}>
           {[
-            { title: 'Dashboard', icon: <DashboardOutlinedIcon />, link: '/Dashboard' },
-            { title: 'Pesanan', icon: <AddToPhotosOutlinedIcon />, link: '/Pesanan' },
+            { title: 'Dashboard', icon: <DashboardIcon />, link: '/Dashboard' },
+            { title: 'Short Link', icon: <LinkIcon />, link: '/Dashboard/ShortLink' },
+            { title: 'QR Code', icon: <QrCode2Icon />, link: '/Dashboard/QRCode' },
+            { title: 'Link Page', icon: <ViewDayIcon />, link: '/Dashboard/LinkPage' },
           ].map((listNavbar, index) => {
             return (
               <>
-                <Link
-                  to={listNavbar.link}
-                  className="disable-link-style"
-                  onClick={window.innerWidth <= 900 ? props.handleSidebar : null}
-                >
-                  <ListItem key={listNavbar.title} disablePadding sx={{ display: 'block' }}>
+                <Link to={listNavbar.link} onClick={window.innerWidth <= 900 ? props.handleSidebar : null}>
+                  <ListItem
+                    key={listNavbar.title}
+                    disablePadding
+                    sx={{
+                      display: 'block',
+                      fontWeight: 'bold',
+                      color: 'primary.main',
+                    }}
+                  >
                     <ListItemButton
                       sx={{
                         minHeight: 48,
@@ -115,6 +127,7 @@ export default function SideBar(props) {
                           minWidth: 0,
                           mr: props.openSidebar ? 3 : 'auto',
                           justifyContent: 'center',
+                          color: 'primary.main',
                         }}
                       >
                         {listNavbar.icon}
@@ -123,11 +136,11 @@ export default function SideBar(props) {
                     </ListItemButton>
                   </ListItem>
                 </Link>
+                <Divider variant="middle" />
               </>
             );
           })}
         </List>
-        <h2>asd</h2>
       </Drawer>
     </>
   );

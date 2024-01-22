@@ -5,48 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Button, Paper, ThemeProvider, createTheme } from '@mui/material';
 
-
-
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#4CAF50',
-    },
-  },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          // Default styles
-          borderWidth: '2px',
-          borderColor: 'theme.palette.primary.main',
-
-          // Hover styles
-          '&:hover': {
-            borderWidth: '2px',
-            borderColor: 'theme.palette.primary.main',
-          },
-
-          // Active styles
-          '&:active': {
-            borderWidth: '2px',
-            borderColor: 'theme.palette.primary.main',
-          },
-
-          // Focus styles
-          '&:focus': {
-            borderWidth: '2px',
-            borderColor: 'theme.palette.primary.main',
-          },
-
-          // Add other styles as needed
-        },
-      },
-    },
-  },
-});
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>

@@ -35,6 +35,7 @@ const AppBar = styled(MuiAppBar, {
 
 export default function NavBar(props) {
   const navigate = useNavigate();
+  const theme = useTheme();
   const { themeMode, toggleThemeMode } = useContext(ThemeModeContext);
 
   // Open Account Menu
@@ -48,27 +49,26 @@ export default function NavBar(props) {
 
   return (
     <>
-      <AppBar position="fixed" open={props.openSidebar}>
+      <AppBar position="fixed" open={props.openSidebar} color="primary">
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
-              color="inherit"
               aria-label="open drawer"
               onClick={props.handleSidebar}
               edge="start"
               sx={{
                 marginRight: 1,
+                color: themeMode === 'light' ? '#ffffff' : 'primary.main',
                 marginLeft: props.openSidebar ? 'none' : 6,
-                // [theme.breakpoints.down('md')]: {
-                //   marginLeft: '0 !important',
-                // },
+                [theme.breakpoints.down('md')]: {
+                  marginLeft: '0 !important',
+                },
               }}
-              className="color-primary"
             >
               <MenuIcon />
             </IconButton>
           </div>
-          <Switch onChange={toggleThemeMode} />
+          <Switch onChange={toggleThemeMode} color="primary" />
           <div style={{ display: 'flex', alignItems: 'center' }}>
             {/* Account Menu */}
             <IconButton
@@ -121,19 +121,19 @@ export default function NavBar(props) {
 
               <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard')}>
                 <ListItemIcon>
-                  <DashboardOutlinedIcon className="color-primary" />
+                  <DashboardOutlinedIcon />
                 </ListItemIcon>
                 Dashboard Admin
               </MenuItem>
               <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard/EditProfil')}>
                 <ListItemIcon>
-                  <ManageAccountsIcon className="color-primary" />
+                  <ManageAccountsIcon />
                 </ListItemIcon>
                 Edit Profil
               </MenuItem>
               <MenuItem onClick={() => handleCloseAccountMenu('Dashboard/UbahPassword')}>
                 <ListItemIcon>
-                  <PasswordIcon className="color-primary" />
+                  <PasswordIcon />
                 </ListItemIcon>
                 Ubah Password
               </MenuItem>
@@ -146,7 +146,7 @@ export default function NavBar(props) {
                 }}
               >
                 <ListItemIcon>
-                  <ExitToAppIcon className="color-primary" />
+                  <ExitToAppIcon />
                 </ListItemIcon>
                 Keluar
               </MenuItem>

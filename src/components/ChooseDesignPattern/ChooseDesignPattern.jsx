@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, Grid, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import { HuePicker } from 'react-color';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -175,7 +175,7 @@ export default function ChooseDesignPattern({ data, setData }) {
           .map((item) => {
             return (
               <SwiperSlide>
-                <Box
+                <Paper
                   onClick={() => setDesignPattern({ ...designPattern, scheme: item.name })}
                   sx={{
                     display: 'flex',
@@ -199,7 +199,7 @@ export default function ChooseDesignPattern({ data, setData }) {
                   }}
                 >
                   {item.name}
-                </Box>
+                </Paper>
               </SwiperSlide>
             );
           })}
@@ -221,7 +221,7 @@ export default function ChooseDesignPattern({ data, setData }) {
           .map((item) => {
             return (
               <SwiperSlide>
-                <Box
+                <Paper
                   onClick={() => setDesignPattern({ ...designPattern, fontFamily: item.name })}
                   sx={{
                     display: 'flex',
@@ -248,7 +248,7 @@ export default function ChooseDesignPattern({ data, setData }) {
                   }}
                 >
                   {item.name}
-                </Box>
+                </Paper>
               </SwiperSlide>
             );
           })}
@@ -267,7 +267,7 @@ export default function ChooseDesignPattern({ data, setData }) {
           .map((item) => {
             return (
               <SwiperSlide>
-                <Box
+                <Paper
                   onClick={() => setDesignPattern({ ...designPattern, fontFamily: item.name })}
                   sx={{
                     display: 'flex',
@@ -294,7 +294,7 @@ export default function ChooseDesignPattern({ data, setData }) {
                   }}
                 >
                   {item.name}
-                </Box>
+                </Paper>
               </SwiperSlide>
             );
           })}
@@ -313,7 +313,7 @@ export default function ChooseDesignPattern({ data, setData }) {
           .map((item) => {
             return (
               <SwiperSlide>
-                <Box
+                <Paper
                   onClick={() => setDesignPattern({ ...designPattern, fontFamily: item.name })}
                   sx={{
                     display: 'flex',
@@ -340,7 +340,7 @@ export default function ChooseDesignPattern({ data, setData }) {
                   }}
                 >
                   {item.name}
-                </Box>
+                </Paper>
               </SwiperSlide>
             );
           })}

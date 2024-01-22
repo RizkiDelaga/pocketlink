@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ThemeModeContext from '../contexts/ThemeMode';
+import { Paper } from '@mui/material';
 
 export default function ThemeModeComponent({ children }) {
   const [themeMode, setThemeMode] = useState('light');
@@ -12,10 +13,5 @@ export default function ThemeModeComponent({ children }) {
   // Menyediakan nilai dan fungsi untuk diakses oleh konsumen
   const themeContextValue = { themeMode, toggleThemeMode };
 
-
-  return (
-    <ThemeModeContext.Provider value={themeContextValue}>
-      {children}
-    </ThemeModeContext.Provider>
-  );
+  return <ThemeModeContext.Provider value={themeContextValue}>{children}</ThemeModeContext.Provider>;
 }

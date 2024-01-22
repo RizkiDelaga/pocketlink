@@ -25,7 +25,7 @@ export default function Dashboard() {
           navigate('/Dashboard/LinkPage');
         }}
       >
-        Make Link Page
+        Link Page
       </button>
     </>
   );

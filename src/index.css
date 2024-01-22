@@ -4,13 +4,13 @@ body {
 
 /* ========= LINK ======== */
 
-.disable-link-style {
-    color: #000000 !important;
+a {
+    color: inherit !important;
     text-decoration: none !important;
     cursor: pointer !important;
-  }
+}
 
-#about::-webkit-scrollbar {
+#phone-frame::-webkit-scrollbar {
     display: none !important;
 
 }
@@ -33,3 +33,9 @@ body {
 .swiper-button-prev.swiper-button-disabled {
     opacity: 0 !important;
 }
+
+
+/* Override Style MUI */
+/* .css-1usbwxn-MuiPaper-root-MuiAppBar-root {
+    background-image: none !important;
+} */

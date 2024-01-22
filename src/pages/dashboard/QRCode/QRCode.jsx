@@ -1,14 +1,17 @@
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useContext, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { Box, Button, Container, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Box, Button, Container, Grid, IconButton, InputAdornment, Paper, TextField, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ShareIcon from '@mui/icons-material/Share';
 import EditIcon from '@mui/icons-material/Edit';
 import EditOffIcon from '@mui/icons-material/EditOff';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import ThemeModeContext from '../../../provider/contexts/ThemeMode';
 
 function QRCode() {
+  const theme = useTheme();
+  const { themeMode } = useContext(ThemeModeContext);
   const [qrcodeValue, setQrcodeValue] = useState({ id: 0, value: '' });
 
   const downloadQRCode = () => {
@@ -43,13 +46,13 @@ function QRCode() {
 
   return (
     <Fragment>
-      <Box sx={{ px: 2 }}>
+      <Box>
         <Grid container spacing={2}>
           <Grid item xs={12} md={5}>
-            <Box sx={{ position: 'sticky', top: 88 }}>
+            <Paper elevation={0} sx={{ position: 'sticky', top: 88, height: 'max-content', p: 4 }}>
               <Box style={{ textAlign: 'center', marginBottom: '24px' }}>
                 <h2 style={{ margin: 0 }}>Generate QR Code</h2>
-                <div>Transform your favorite links into QR codes quickly and easily.</div>
+                <div>Transform your text into QR Code quickly and easily</div>
 
                 <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                   <div
@@ -81,6 +84,7 @@ function QRCode() {
                           </InputAdornment>
                         ),
                       }}
+                      sx={{ my: 1 }}
                       autoComplete="off"
                     />
 
@@ -96,8 +100,8 @@ function QRCode() {
                   <QRCodeCanvas
                     value={qrcodeValue.value}
                     size={300}
-                    bgColor={'#ffffff'}
-                    fgColor={'#000000'}
+                    bgColor={themeMode === 'light' ? '#ffffff' : '#000000'}
+                    fgColor={themeMode === 'light' ? '#000000' : '#ffffff'}
                     level={'L'}
                     // includeMargin={true}
                   />
@@ -121,16 +125,17 @@ function QRCode() {
                   </div>
                 </Box>
               </div>
-            </Box>
+            </Paper>
           </Grid>
           <Grid item xs={12} md={7}>
-            <h2 style={{ margin: 0 }}>Saved QR Code</h2>
+            <h3 style={{ margin: 0 }}>Saved QR Code</h3>
             <Grid container spacing={2}>
               {['1212', '112', '1212', '122122', '243431', '2431', '24331', '253541', '2153', '2153433', '543532'].map(
                 (item) => {
                   return (
                     <Grid item xs={12} sm={6} md={6} lg={4}>
-                      <Box
+                      <Paper
+                        elevation={0}
                         sx={{
                           display: 'flex',
                           flexDirection: 'column',
@@ -146,8 +151,8 @@ function QRCode() {
                         <QRCodeCanvas
                           value={item}
                           size={200}
-                          bgColor={'#ffffff'}
-                          fgColor={'#000000'}
+                          bgColor={themeMode === 'light' ? '#ffffff' : '#000000'}
+                          fgColor={themeMode === 'light' ? '#000000' : '#ffffff'}
                           level={'L'}
                           // includeMargin={true}
                         />
@@ -178,7 +183,7 @@ function QRCode() {
                             </IconButton>
                           </div>
                         </Box>
-                      </Box>
+                      </Paper>
                     </Grid>
                   );
                 }

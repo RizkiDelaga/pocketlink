@@ -25,6 +25,7 @@ export default function MainLayout() {
         sx={{
           flexGrow: 1,
           paddingTop: `calc(64px + 24px)`,
+          paddingBottom: `24px`,
           paddingX: '24px',
           marginLeft: openSidebar ? '300px' : '64.2px',
           [theme.breakpoints.down('md')]: {

@@ -12,6 +12,8 @@ import PageViewer from './pages/PageViewer/PageViewer';
 import MainLayout from './layout/MainLayout';
 import ThemeModeComponent from './provider/components/ThemeModeComponent';
 import ThemeProviderComponent from './provider/components/ThemeProviderComponent';
+import PageNotFound404 from './pages/PageNotFound404';
+import LinkPage from './pages/dashboard/LinkPage/LinkPage';
 
 function App() {
   const HandleLoginSuccessfully = () => {
@@ -32,7 +34,9 @@ function App() {
     })
     .catch(error => {
       console.log(error);
+      return <PageNotFound404 />
       return alert(location.pathname)
+      
     });
   }
 
@@ -68,8 +72,8 @@ function App() {
               <Route path="Dashboard" element={<Dashboard />}/>
               <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
               <Route path="Dashboard/QRCode" element={<QRCode/>}/>
-              <Route path="Dashboard/LinkPage" element={<CreateLinkPage/>}/>
-              <Route path="Dashboard/LinkPage/Create" element={"Create Page"}/>
+              <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
+              <Route path="Dashboard/LinkPage/CreteLinkPage" element={<CreateLinkPage />}/>
               <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
             </Route>
 

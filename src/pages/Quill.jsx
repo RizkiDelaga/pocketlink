@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // Import CSS untuk tema snow
 import 'react-quill/dist/quill.bubble.css'; // Import CSS untuk tema bubble
-import Parser from 'html-react-parser';
-import { Button } from '@mui/material';
+import { Button, Container } from '@mui/material';
+import axios from 'axios';
 
 function Quill() {
   const [bubbleStyle, setBubbleStyle] = useState(false);
   const [readMode, setReadMode] = useState(true);
-  const [text, setText] = useState(
-    `<h1 class="ql-align-center">Quill Rich Text Editor</h1><p><br></p><p>Quill is a free, <a href="https://github.com/quilljs/quill/" rel="noopener noreferrer" target="_blank">open source</a> WYSIWYG editor built for the modern web. With its <a href="https://quilljs.com/docs/modules/" rel="noopener noreferrer" target="_blank">modular architecture</a> and expressive <a href="https://quilljs.com/docs/api/" rel="noopener noreferrer" target="_blank">API</a>, it is completely customizable to fit any need.</p><p><br></p><h2 class="ql-align-center">Getting Started is Easy</h2><p><br></p><pre class="ql-syntax" spellcheck="false">// &lt;link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet"&gt; // &lt;script src="https://cdn.quilljs.com/1.2.6/quill.min.js"&gt;&lt;/script&gt; var quill = new Quill('#editor', { modules: { toolbar: '#toolbar' }, theme: 'snow' }); // Open your browser's developer console to try out the API! </pre>`
-  );
+  const [text, setText] = useState('');
+  const [text2, setText2] = useState('');
+  const [selectedText, setSelectedText] = useState('');
 
   const modules = {
     toolbar: [
@@ -57,31 +57,115 @@ function Quill() {
     'video',
   ];
 
+  useEffect(() => {
+    handleGetNote();
+  }, []);
+
+  const handleUploadNote = async () => {
+    try {
+      const res = await axios({
+        method: 'POST',
+        url: `https://6266738863e0f382568253d1.mockapi.io/api/custom-todo`,
+        data: {
+          title: 'Land Rover Model T',
+          price: '799.00',
+          image: 'https://loremflickr.com/640/480/transport',
+          deskripsi: text,
+          status: false,
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGetNote = async () => {
+    try {
+      const res = await axios({
+        method: 'Get',
+        url: `https://6266738863e0f382568253d1.mockapi.io/api/custom-todo`,
+      });
+      console.log(typeof res.data[2].deskripsi);
+      setText(res.data[2].deskripsi);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelectionChange = (range, source, editor) => {
+    if (range) {
+      const selectedValue = editor.getText(range.index, range.length);
+      console.log(range);
+      setSelectedText(selectedValue);
+    }
+  };
+
+  const handleDeleteText = (range, source, editor) => {
+    if (range) {
+      const selectedValue = editor.deleteText(range.index, range.length);
+      console.log(range);
+      // setSelectedText(selectedValue);
+    }
+  };
+
+  const handleTextDeletion = () => {
+    const quill = quillRef.current.getEditor();
+    const selection = quill.getSelection();
+
+    if (selection && selection.length > 0) {
+      quill.deleteText(selection.index, selection.length);
+    }
+  };
+
+  const handleTextReplacement = () => {
+    const quill = quillRef.current.getEditor();
+    const selection = quill.getSelection();
+
+    if (selection && selection.length > 0) {
+      const newText = selectedText.toUpperCase();
+      quill.deleteText(selection.index, selection.length);
+      quill.insertText(selection.index, newText);
+    }
+  };
+
+  const quillRef = React.createRef();
+
   return (
     <div className="quill">
       <h1>React Quill Bubble</h1>
-      {bubbleStyle === true ? null : (
-        <ReactQuill
-          theme="snow"
-          value={text}
-          onChange={setText}
-          modules={modules}
-          formats={formats}
-          placeholder="Tulis sesuatu..."
-          readOnly={readMode}
-        />
-      )}
-      {bubbleStyle === false ? null : (
-        <ReactQuill
-          theme="bubble"
-          value={text}
-          onChange={setText}
-          modules={modules}
-          formats={formats}
-          placeholder="Tulis sesuatu..."
-          readOnly={readMode}
-        />
-      )}
+      {selectedText}
+
+      <Button variant="outlined" size="small" onClick={handleTextReplacement}>
+        Upper Case
+      </Button>
+      <Container>
+        {bubbleStyle === true ? null : (
+          <ReactQuill
+            ref={quillRef}
+            theme="snow"
+            value={text}
+            onChange={setText}
+            onChangeSelection={handleSelectionChange}
+            modules={modules}
+            formats={formats}
+            placeholder="Tulis sesuatu..."
+            readOnly={readMode}
+          />
+        )}
+        {bubbleStyle === false ? null : (
+          <ReactQuill
+            ref={quillRef}
+            theme="bubble"
+            value={text}
+            onChange={setText}
+            modules={modules}
+            formats={formats}
+            placeholder="Tulis sesuatu..."
+            readOnly={readMode}
+          />
+        )}
+      </Container>
       <Button variant="contained" onClick={() => setReadMode(!readMode)}>
         Read Mode: {readMode === true ? 'true' : 'false'}
       </Button>
@@ -91,8 +175,23 @@ function Quill() {
         Bubble Style: {bubbleStyle === true ? 'true' : 'false'}
       </Button>
       <br />
-      {text}
-      {Parser(text)}
+      <Button variant="outlined" onClick={handleUploadNote}>
+        Upload Note
+      </Button>
+      <br />
+      <hr />
+      <br />
+
+      <ReactQuill
+        ref={quillRef}
+        theme="bubble"
+        value={text2}
+        onChange={setText2}
+        modules={modules}
+        formats={formats}
+        placeholder="Tulis sesuatu..."
+      />
+      {/* {Parser(text)} */}
     </div>
   );
 }

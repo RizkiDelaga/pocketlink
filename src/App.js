@@ -15,6 +15,7 @@ import ThemeProviderComponent from './provider/components/ThemeProviderComponent
 import PageNotFound404 from './pages/PageNotFound404';
 import LinkPage from './pages/dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
+import Quill2 from './pages/Quill2';
 
 function App() {
   const HandleLoginSuccessfully = () => {
@@ -72,6 +73,7 @@ function App() {
               
               
             <Route element={<MainLayout />}>
+              <Route path="Quill2" element={<Quill2 />}/>
               <Route path="Dashboard" element={<Dashboard />}/>
               <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
               <Route path="Dashboard/QRCode" element={<QRCode/>}/>

@@ -5,7 +5,7 @@ body {
 /* ========= LINK ======== */
 
 a {
-    color: inherit !important;
+    /* color: inherit !important; */
     text-decoration: none !important;
     cursor: pointer !important;
 }
@@ -40,11 +40,40 @@ a {
     background-image: none !important;
 } */
 
-
+/* Override Style React-Quill */
 .quill .ql-toolbar {
-    background: #eaecec;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
-  }
+    background: #fff;
+    /* border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em; */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-  
+.ql-snow h1 {
+    font-size: 2.5em !important;
+}
+
+.ql-snow h2 {
+    font-size: 2em !important;
+}
+
+.ql-snow h3 {
+    font-size: 1.67em !important;
+}
+
+.ql-snow h4 {
+    font-size: 1.5em !important;
+}
+
+.ql-snow h5 {
+    font-size: 1.33em !important;
+}
+
+.ql-snow h6 {
+    font-size: 1.17em !important;
+}
+
+.ql-snow p {
+    font-size: 16px;
+}

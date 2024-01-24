@@ -50,6 +50,7 @@ export default function ThemeProviderComponent({ children }) {
             // Default styles
             borderWidth: '2px',
             borderColor: 'theme.palette.primary.main',
+            fontWeight: 'bold',
 
             // Hover styles
             '&:hover': {

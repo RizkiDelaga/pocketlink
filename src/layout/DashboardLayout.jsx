@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import SideBar from '../components/SideBar/SideBar';
 import NavBar from '../components/NavBar/NavBar';
 
-export default function MainLayout() {
+export default function DashboardLayout() {
   const navigate = useNavigate();
   const theme = useTheme();
   const [openSidebar, setOpenSidebar] = React.useState(false);
@@ -17,8 +17,10 @@ export default function MainLayout() {
     <>
       <CssBaseline />
       <NavBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
+      <SideBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
 
       <Box
+        component="main"
         sx={{
           flexGrow: 1,
           paddingTop: `calc(64px + 24px)`,

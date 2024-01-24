@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router';
+import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router';
 import Home from "./pages/Home";
 import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
@@ -9,15 +9,18 @@ import CreateLinkPage from './pages/dashboard/LinkPage/CreateLinkPage';
 import ShortLink from './pages/dashboard/ShortLink/ShortLink';
 import Dashboard from './pages/dashboard/Dashboard';
 import PageViewer from './pages/PageViewer/PageViewer';
-import MainLayout from './layout/MainLayout';
 import ThemeModeComponent from './provider/components/ThemeModeComponent';
 import ThemeProviderComponent from './provider/components/ThemeProviderComponent';
 import PageNotFound404 from './pages/PageNotFound404';
 import LinkPage from './pages/dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
+import DashboardLayout from './layout/DashboardLayout';
+import MainLayout from './layout/MainLayout';
 
 function App() {
+
+
   const HandleLoginSuccessfully = () => {
     if (localStorage.getItem("accessToken")) {
         return <Navigate to={""} />
@@ -25,23 +28,24 @@ function App() {
     return <Outlet/>;
   }
 
-
-  const DirectShortLink =  () =>{
-    const location = useLocation();    
-
+  const DirectShortLink = () => {
+    const location = useLocation();
+  
     SearchShortLink(location.pathname.split("/").join(""))
-    .then(result => {
-      window.location.href = result
-      return null
-    })
-    .catch(error => {
-      console.log(error);
-      return <PageNotFound404 />
-      return alert(location.pathname)
-      
-    });
-  }
-
+      .then(result => {
+        if (result) {
+          window.location.href = result;
+        } else {
+          // Handle case where short link is not found
+          window.location.href = "/404PageNotFound";
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        // Handle other errors as needed
+      });
+  };
+  
   const SearchShortLink = async (path) => {
     try {
       const res = await axios({
@@ -51,12 +55,19 @@ function App() {
         },
         url: `${process.env.REACT_APP_API_KEY}/api/v1/link/search/by?customLink=${path}`,
       });
-      
-      return res.data.data[0].customLink === path? res.data.data[0].rawLink: null
+  
+      // Check if the array is not empty before accessing its elements
+      if (res.data.data.length > 0 && res.data.data[0].customLink === path) {
+        return res.data.data[0].rawLink;
+      } else {
+        return null; // Short link not found
+      }
     } catch (error) {
       console.log(error);
+      // Handle other errors as needed
     }
   };
+  
 
   return (
     <ThemeModeComponent>
@@ -71,8 +82,11 @@ function App() {
               <Route path="LoginProcess/:Token" element={"Login Process"}/>
               <Route path="Quill" element={<Quill />}/>
               
-              
             <Route element={<MainLayout />}>
+              <Route path="404PageNotFound" element={<PageNotFound404 />}/>
+            </Route>
+              
+            <Route element={<DashboardLayout />}>
               <Route path="Quill2" element={<Quill2 />}/>
               <Route path="Dashboard" element={<Dashboard />}/>
               <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
@@ -101,5 +115,6 @@ export default App;
 // 3. Coloring Theme
 // 4. Page 404
 // 5. Awevers Project (Next JS)
+// 6. Masterpad (React JS)
 
 

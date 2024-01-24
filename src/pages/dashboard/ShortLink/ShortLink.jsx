@@ -1,12 +1,27 @@
-import { Box, Button, Container, Grid, IconButton, InputAdornment, Menu, MenuItem, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  Paper,
+  TextField,
+} from '@mui/material';
 import axios from 'axios';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import CasinoIcon from '@mui/icons-material/Casino';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import EditOffIcon from '@mui/icons-material/EditOff';
+import { QRCodeCanvas } from 'qrcode.react';
+import ThemeModeContext from '../../../provider/contexts/ThemeMode';
 
 export default function ShortLink() {
+  const { themeMode } = useContext(ThemeModeContext);
   const [listShortLink, setListShortLink] = useState([]);
   const [formCreateShortLink, setFormCreateShortLink] = useState({
     id: null,
@@ -120,187 +135,245 @@ export default function ShortLink() {
 
   return (
     <Fragment>
-      <Container>
-        <div style={{ textAlign: 'center' }}>
-          <h2>Short Link</h2>
-          <div>Deskripsi singkat mengenai fitur ini</div>
-          <br />
-          <br />
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (formCreateShortLink.id) {
-                handleUpdateShortLink(formCreateShortLink.id);
-              } else {
-                if (listShortLink.length < 10) {
-                  handleCreateShortLink();
-                }
-              }
-            }}
-          >
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{ width: '100%', maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <TextField
-                  required
-                  variant="standard"
-                  label="Back-Half (Short Link)"
-                  type="text"
-                  value={formCreateShortLink.shortLink}
-                  onChange={(e) => {
-                    setFormCreateShortLink({ ...formCreateShortLink, shortLink: e.target.value });
-                  }}
-                  InputProps={{
-                    startAdornment: ' Bit.ly/',
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          color="primary"
-                          edge="end"
-                          onClick={() => {
-                            setFormCreateShortLink({ ...formCreateShortLink, shortLink: generateRandomLink() });
-                          }}
-                        >
-                          <CasinoIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  autoComplete="off"
-                  sx={{ width: '100%' }}
-                />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={5}>
+          <Paper elevation={0} sx={{ position: 'sticky', top: 88, height: 'max-content', p: 4 }}>
+            <Box style={{ textAlign: 'center' }}>
+              <h2>Short Link</h2>
+              <div>Deskripsi singkat mengenai fitur ini</div>
+              <br />
+              <br />
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (formCreateShortLink.id) {
+                    handleUpdateShortLink(formCreateShortLink.id);
+                  } else {
+                    if (listShortLink.length < 10) {
+                      handleCreateShortLink();
+                    }
+                  }
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <div
+                    style={{ width: '100%', maxWidth: '480px', display: 'flex', flexDirection: 'column', gap: '12px' }}
+                  >
+                    <TextField
+                      required
+                      variant="standard"
+                      label="Back-Half (Short Link)"
+                      type="text"
+                      value={formCreateShortLink.shortLink}
+                      onChange={(e) => {
+                        setFormCreateShortLink({ ...formCreateShortLink, shortLink: e.target.value });
+                      }}
+                      InputProps={{
+                        startAdornment: ' Bit.ly/',
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              color="primary"
+                              edge="end"
+                              onClick={() => {
+                                setFormCreateShortLink({ ...formCreateShortLink, shortLink: generateRandomLink() });
+                              }}
+                            >
+                              <CasinoIcon />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                      autoComplete="off"
+                      sx={{ width: '100%' }}
+                    />
 
-                <TextField
-                  required
-                  variant="standard"
-                  label="Destination Links"
-                  type="text"
-                  value={formCreateShortLink.destinationLinks}
-                  onChange={(e) => {
-                    setFormCreateShortLink({ ...formCreateShortLink, destinationLinks: e.target.value });
-                  }}
-                  autoComplete="off"
-                  sx={{ width: '100%' }}
-                />
+                    <TextField
+                      required
+                      variant="standard"
+                      label="Destination Links"
+                      type="text"
+                      value={formCreateShortLink.destinationLinks}
+                      onChange={(e) => {
+                        setFormCreateShortLink({ ...formCreateShortLink, destinationLinks: e.target.value });
+                      }}
+                      autoComplete="off"
+                      sx={{ width: '100%' }}
+                    />
 
-                <Button
-                  variant="contained"
-                  size="medium"
-                  type="submit"
-                  disabled={listShortLink.length >= 10 ? true : false}
-                  sx={{ width: '100%', fontWeight: 'bold', color: 'white' }}
-                >
-                  {formCreateShortLink.id ? 'Edit Short Link' : 'Create Short Link'}
-                </Button>
-                {errorStatus
-                  ? 'Back-Half (Short Link) ini sudah pernah digunakan! Anda bisa menggunakan custom link lain atau mencobanya kembali nanti'
-                  : null}
-              </div>
-            </Box>
-          </form>
-        </div>
-
-        <h3>Shortened Links</h3>
-
-        {listShortLink.map((item, index) => {
-          return (
-            <Box
-              sx={{
-                borderRadius: '4px',
-                backgroundColor: '#FAECD1',
-                padding: 2,
-                mb: 2,
-              }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm>
-                  <div>
-                    <div style={{ fontWeight: 'bold', wordWrap: 'break-word' }}>
-                      first-program.vercel.app/{item.customLink}
-                    </div>
-                    <div style={{ wordWrap: 'break-word', fontSize: '14px' }}>Direct To : {item.rawLink}</div>
-                  </div>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm="auto"
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '8px',
-                  }}
-                >
-                  <div>
                     <Button
                       variant="contained"
                       size="medium"
-                      onClick={() => {}}
-                      sx={{ width: 'max-content', fontWeight: 'bold', color: 'white' }}
+                      type="submit"
+                      disabled={listShortLink.length >= 10 ? true : false}
+                      sx={{ width: '100%', color: 'white' }}
                     >
-                      Show QRCode
+                      {formCreateShortLink.id ? 'Edit Short Link' : 'Create Short Link'}
                     </Button>
+                    {formCreateShortLink.id ? (
+                      <Button
+                        variant="outlined"
+                        size="medium"
+                        onClick={() =>
+                          setFormCreateShortLink({
+                            id: null,
+                            shortLink: '',
+                            destinationLinks: '',
+                          })
+                        }
+                        sx={{ width: '100%' }}
+                      >
+                        Cancel
+                      </Button>
+                    ) : null}
+                    {errorStatus
+                      ? 'Back-Half (Short Link) ini sudah pernah digunakan! Anda bisa menggunakan custom link lain atau mencobanya kembali nanti'
+                      : null}
                   </div>
-                  <Button
-                    variant="contained"
-                    size="medium"
-                    onClick={() => {}}
-                    sx={{ width: '100%', fontWeight: 'bold', color: 'white' }}
-                  >
-                    Share
-                  </Button>
+                </Box>
+              </form>
+            </Box>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={7}>
+          <h3 style={{ margin: 0 }}>Shortened Links</h3>
 
-                  <IconButton
-                    color="primary"
-                    onClick={(event) => {
-                      setMenuItem(item);
-                      setAnchorElMenuAction(event.currentTarget);
+          {listShortLink.map((item, index) => {
+            return (
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 2,
+                  border: 2,
+                  borderColor: 'primary.main',
+                  borderRadius: '8px',
+                  mb: 2,
+                }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm>
+                    <Grid container spacing={2}>
+                      <Grid item xs="auto">
+                        <QRCodeCanvas
+                          value={item.customLink}
+                          size={80}
+                          bgColor={themeMode === 'light' ? '#ffffff' : '#000000'}
+                          fgColor={themeMode === 'light' ? '#000000' : '#ffffff'}
+                          level={'L'}
+                          // includeMargin={true}
+                        />
+                      </Grid>
+                      <Grid
+                        item
+                        xs="auto"
+                        sx={{ wordWrap: 'break-word', wordBreak: 'break-word', width: 'fit-content' }}
+                      >
+                        <div style={{ fontWeight: 'bold', wordWrap: 'break-word' }}>
+                          first-program.vercel.app/{item.customLink}
+                        </div>
+                        <Box
+                          sx={{
+                            fontSize: '14px',
+                            width: '200px',
+                            // overflowWrap: 'break-word',
+                            wordWrap: 'break-word',
+                            wordBreak: 'break-word',
+                          }}
+                        >
+                          Direct To : {item.rawLink}
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm="auto"
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'end',
+                      alignItems: 'start',
+                      gap: '8px',
                     }}
                   >
-                    <MoreVertIcon />
-                  </IconButton>
+                    <Box sx={{ display: 'flex', justifyContent: 'end', width: '100%' }}>
+                      <Button
+                        variant="outlined"
+                        size="medium"
+                        onClick={() => {
+                          if (formCreateShortLink.id === item.id) {
+                            setFormCreateShortLink({
+                              id: null,
+                              shortLink: '',
+                              destinationLinks: '',
+                            });
+                          } else {
+                            setFormCreateShortLink({
+                              id: item.id,
+                              shortLink: item.customLink,
+                              destinationLinks: item.rawLink,
+                            });
+                          }
+                          handleClose();
+                        }}
+                        sx={{ width: { xs: '100%', md: 'fit-content' }, fontWeight: 'bold' }}
+                      >
+                        {formCreateShortLink.id === item.id ? (
+                          <EditOffIcon style={{ fontSize: '20px' }} />
+                        ) : (
+                          <EditIcon style={{ fontSize: '20px' }} />
+                        )}
+                        <span style={{ marginLeft: '8px' }}>Edit</span>
+                      </Button>
+                    </Box>
+
+                    <IconButton
+                      color="primary"
+                      onClick={(event) => {
+                        setMenuItem(item);
+                        setAnchorElMenuAction(event.currentTarget);
+                      }}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Box>
-          );
-        })}
-        <Menu
-          dense
-          anchorEl={anchorElMenuAction}
-          open={menuAction}
-          onClose={handleClose}
-          PaperProps={{
-            style: {
-              boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-            },
-          }}
-        >
-          <MenuItem
-            onClick={() => {
-              setFormCreateShortLink({
-                id: menuItem.id,
-                shortLink: menuItem.customLink,
-                destinationLinks: menuItem.rawLink,
-              });
-              handleClose();
+              </Paper>
+            );
+          })}
+          <Menu
+            dense
+            anchorEl={anchorElMenuAction}
+            open={menuAction}
+            onClose={handleClose}
+            PaperProps={{
+              style: {
+                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+              },
             }}
-            sx={{ color: 'orange', display: 'flex', gap: 1 }}
           >
-            <EditIcon />
-            Edit
-          </MenuItem>
-          <MenuItem
-            onClick={() => {
-              handleDeleteShortLink(menuItem.id);
-              handleClose();
-            }}
-            sx={{ color: 'red', display: 'flex', gap: 1 }}
-          >
-            <DeleteForeverIcon />
-            Delete
-          </MenuItem>
-        </Menu>
-      </Container>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+              }}
+              sx={{ display: 'flex', gap: 1 }}
+            >
+              <DeleteForeverIcon />
+              Share
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleDeleteShortLink(menuItem.id);
+                handleClose();
+              }}
+              sx={{ color: 'red', display: 'flex', gap: 1 }}
+            >
+              <DeleteForeverIcon />
+              Delete
+            </MenuItem>
+          </Menu>
+        </Grid>
+      </Grid>
     </Fragment>
   );
 }

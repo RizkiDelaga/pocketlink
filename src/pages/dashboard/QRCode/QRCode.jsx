@@ -110,7 +110,7 @@ function QRCode() {
                       variant="contained"
                       size="small"
                       onClick={downloadQRCode}
-                      sx={{ width: '100%', fontWeight: 'bold', color: 'white' }}
+                      sx={{ width: '100%', color: 'white' }}
                     >
                       Download
                     </Button>

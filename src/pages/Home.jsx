@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Box, CssBaseline, Paper } from '@mui/material';
+import { Box, Button, CssBaseline, Paper } from '@mui/material';
 
 function Home() {
   const navigate = useNavigate();
@@ -15,13 +15,37 @@ function Home() {
         placeat dicta quos.
       </Paper>
 
-      <button
+      <Button
         onClick={() => {
-          navigate('Dashboard');
+          navigate('/Dashboard');
         }}
       >
         Dashboard
-      </button>
+      </Button>
+
+      <Button
+        onClick={() => {
+          navigate('/Login');
+        }}
+      >
+        Login
+      </Button>
+
+      <Button
+        onClick={() => {
+          navigate('/Register');
+        }}
+      >
+        Register
+      </Button>
+
+      <Button
+        onClick={() => {
+          localStorage.removeItem('accessToken');
+        }}
+      >
+        Logout
+      </Button>
     </>
   );
 }

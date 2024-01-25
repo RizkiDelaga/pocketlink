@@ -17,13 +17,21 @@ import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
 import DashboardLayout from './layout/DashboardLayout';
 import MainLayout from './layout/MainLayout';
+import LoginProcess from './pages/auth/LoginProcess';
 
 function App() {
 
 
   const HandleLoginSuccessfully = () => {
     if (localStorage.getItem("accessToken")) {
-        return <Navigate to={""} />
+        return <Navigate to={"/Dashboard"} />
+    }
+    return <Outlet/>;
+  }
+
+  const ProtectedRoute = () => {
+    if (!localStorage.getItem("accessToken")) {
+        return <Navigate to={"/Login"} />
     }
     return <Outlet/>;
   }
@@ -74,27 +82,30 @@ function App() {
       <ThemeProviderComponent>
         <BrowserRouter>
           <Routes>
-            {/* <Route element={<HandleLoginSuccessfully />}>
-            </Route> */}
-            <Route path="" element={<Home />}/>
-              <Route path="Login" element={<Login/>}/>
-              <Route path="Register" element={<Register/>}/>
-              <Route path="LoginProcess/:Token" element={"Login Process"}/>
-              <Route path="Quill" element={<Quill />}/>
-              
             <Route element={<MainLayout />}>
-              <Route path="404PageNotFound" element={<PageNotFound404 />}/>
+              <Route path="" element={<Home />}/>
+                <Route path="LoginProcess" element={<LoginProcess />}/>
+                <Route path="404PageNotFound" element={<PageNotFound404 />}/>
+
+                <Route element={<HandleLoginSuccessfully />}>
+                  <Route path="Login" element={<Login/>}/>
+                  <Route path="Register" element={<Register/>}/>
+                </Route>
             </Route>
               
-            <Route element={<DashboardLayout />}>
-              <Route path="Quill2" element={<Quill2 />}/>
-              <Route path="Dashboard" element={<Dashboard />}/>
-              <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
-              <Route path="Dashboard/QRCode" element={<QRCode/>}/>
-              <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
-              <Route path="Dashboard/LinkPage/CreteLinkPage" element={<CreateLinkPage />}/>
-              <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
+            <Route element={<ProtectedRoute />}>
+              <Route element={<DashboardLayout />}>
+                <Route path="Dashboard" element={<Dashboard />}/>
+                <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
+                <Route path="Dashboard/QRCode" element={<QRCode/>}/>
+                <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
+                <Route path="Dashboard/LinkPage/CreteLinkPage" element={<CreateLinkPage />}/>
+                <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
+              </Route>
             </Route>
+
+            <Route path="Quill" element={<Quill />}/>
+            <Route path="Quill2" element={<Quill2 />}/>
 
             <Route path="m/*" element={<PageViewer/>}/>
             <Route path="*" element={<DirectShortLink/>}/>

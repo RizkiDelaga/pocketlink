@@ -45,7 +45,7 @@ function App() {
           window.location.href = result;
         } else {
           // Handle case where short link is not found
-          window.location.href = "/404PageNotFound";
+          window.location.href = "/PageNotFound";
         }
       })
       .catch(error => {
@@ -85,7 +85,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="" element={<Home />}/>
                 <Route path="LoginProcess" element={<LoginProcess />}/>
-                <Route path="404PageNotFound" element={<PageNotFound404 />}/>
+                <Route path="PageNotFound" element={<PageNotFound404 />}/>
 
                 <Route element={<HandleLoginSuccessfully />}>
                   <Route path="Login" element={<Login/>}/>
@@ -128,4 +128,5 @@ export default App;
 // 5. Awevers Project (Next JS)
 // 6. Masterpad (React JS)
 
-
+// Request Backend:
+// 1. Endpoint Token Status (Is Expired)

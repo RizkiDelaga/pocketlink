@@ -25,18 +25,10 @@ function Home() {
 
       <Button
         onClick={() => {
-          navigate('/Login');
+          navigate('/SSOAuthentication');
         }}
       >
         Login
-      </Button>
-
-      <Button
-        onClick={() => {
-          navigate('/Register');
-        }}
-      >
-        Register
       </Button>
 
       <Button

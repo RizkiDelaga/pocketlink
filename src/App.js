@@ -1,7 +1,5 @@
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router';
 import Home from "./pages/Home";
-import Register from "./pages/auth/Register";
-import Login from "./pages/auth/Login";
 import QRCode from "./pages/dashboard/QRCode/QRCode";
 import axios from "axios";
 import { BrowserRouter } from 'react-router-dom';
@@ -18,9 +16,9 @@ import Quill2 from './pages/Quill2';
 import DashboardLayout from './layout/DashboardLayout';
 import MainLayout from './layout/MainLayout';
 import LoginProcess from './pages/auth/LoginProcess';
+import SSOAuthentication from './pages/auth/SSOAuthentication';
 
 function App() {
-
 
   const HandleLoginSuccessfully = () => {
     if (localStorage.getItem("accessToken")) {
@@ -76,6 +74,17 @@ function App() {
     }
   };
   
+  const SSOValidation = () => {
+    if (localStorage.getItem('accessToken')) {
+      // Validasi Token by API
+      if (true) {
+        // window.location.href =``
+        return null
+      } else {
+        return <Navigate to={`/SSOAuthentication?tokenStatus=expired`} />
+      }
+    }
+  }
 
   return (
     <ThemeModeComponent>
@@ -88,8 +97,7 @@ function App() {
                 <Route path="PageNotFound" element={<PageNotFound404 />}/>
 
                 <Route element={<HandleLoginSuccessfully />}>
-                  <Route path="Login" element={<Login/>}/>
-                  <Route path="Register" element={<Register/>}/>
+                  <Route path="SSOAuthentication" element={<SSOAuthentication/>}/>
                 </Route>
             </Route>
               

@@ -1,9 +1,9 @@
-import { Box, CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Outlet, useNavigate } from 'react-router-dom';
-import SideBar from '../components/SideBar/SideBar';
-import NavBar from '../components/NavBar/NavBar';
+import DashboardSideBar from '../components/SideBar/DashboardSideBar';
+import DashboardNavbar from '../components/NavBar/DashboardNavbar';
 
 export default function DashboardLayout() {
   const navigate = useNavigate();
@@ -15,9 +15,8 @@ export default function DashboardLayout() {
 
   return (
     <>
-      <CssBaseline />
-      <NavBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
-      <SideBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
+      <DashboardNavbar openSidebar={openSidebar} handleSidebar={handleSidebar} />
+      <DashboardSideBar openSidebar={openSidebar} handleSidebar={handleSidebar} />
 
       <Box
         component="main"

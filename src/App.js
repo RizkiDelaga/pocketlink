@@ -14,7 +14,7 @@ import LinkPage from './pages/dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
 import DashboardLayout from './layout/DashboardLayout';
-import MainLayout from './layout/MainLayout';
+import DefaultLayout from './layout/DefaultLayout';
 import LoginProcess from './pages/auth/LoginProcess';
 import SSOAuthentication from './pages/auth/SSOAuthentication';
 
@@ -29,7 +29,7 @@ function App() {
 
   const ProtectedRoute = () => {
     if (!localStorage.getItem("accessToken")) {
-        return <Navigate to={"/Login"} />
+        return <Navigate to={"/SSOAuthentication"} />
     }
     return <Outlet/>;
   }
@@ -91,7 +91,7 @@ function App() {
       <ThemeProviderComponent>
         <BrowserRouter>
           <Routes>
-            <Route element={<MainLayout />}>
+            <Route element={<DefaultLayout />}>
               <Route path="" element={<Home />}/>
                 <Route path="LoginProcess" element={<LoginProcess />}/>
                 <Route path="PageNotFound" element={<PageNotFound404 />}/>

@@ -1,0 +1,10 @@
+.menu-item-mobile {
+    transition: 0.3s ease;
+}
+
+.menu-item-mobile:hover {
+    background-color: #ff4500;
+    color: #ffffff;
+    border-radius: 4px;
+    padding-left: 32px;
+}

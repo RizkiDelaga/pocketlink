@@ -1,15 +1,13 @@
 import { Fragment, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Box, Button, CssBaseline, Paper } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 
 function Home() {
   const navigate = useNavigate();
 
   return (
     <>
-      <CssBaseline />
-
-      <Paper>
+      <Paper elevation={0} sx={{ height: '1700px' }}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione eos, temporibus repellat quisquam numquam
         minima blanditiis consectetur iusto impedit officiis excepturi non eveniet tenetur? Voluptatum quisquam nostrum
         placeat dicta quos.

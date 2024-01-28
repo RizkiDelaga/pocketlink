@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ThemeModeContext from '../contexts/ThemeMode';
-import { ThemeProvider, createTheme } from '@mui/material';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 
 export default function ThemeProviderComponent({ children }) {
   const { themeMode } = useContext(ThemeModeContext);
@@ -8,33 +8,38 @@ export default function ThemeProviderComponent({ children }) {
   const theme = createTheme({
     palette: {
       mode: themeMode,
+      primary: {
+        main: '#AA77FF',
+      },
+      secondary: {
+        main: '#62CDFF',
+      },
+      alternative: {
+        main: '#C9EEFF',
+      },
+      light: {
+        main: '#FFFFFF',
+      },
+      dark: {
+        main: '#000000',
+      },
       ...(themeMode === 'light'
         ? {
-            // palette values for light mode
-            primary: {
-              main: '#4CAF50',
-            },
             background: {
-              default: '#eee',
-              paper: '#fff',
+              default: '#F1F6F9',
+              paper: '#FFFFFF',
             },
             text: {
               primary: '#000000',
-              // secondary: '#000000',
             },
           }
         : {
-            // palette values for dark mode
-            primary: {
-              main: '#4CAF50',
-            },
             background: {
               default: '#000000',
               paper: '#272727',
             },
             text: {
               primary: '#ffffff',
-              // secondary: '#eeeeee',
             },
           }),
     },
@@ -44,37 +49,50 @@ export default function ThemeProviderComponent({ children }) {
           root: { backgroundImage: 'none' },
         },
       },
+      MuiDialog: {
+        styleOverrides: {
+          paper: { backgroundImage: 'none' },
+        },
+      },
+      MuiDivider: {
+        styleOverrides: {
+          root: {
+            backgroundColor: '#AA77FF',
+            height: '1px',
+          },
+        },
+      },
       MuiButton: {
         styleOverrides: {
           root: {
             // Default styles
             borderWidth: '2px',
-            borderColor: 'theme.palette.primary.main',
             fontWeight: 'bold',
 
             // Hover styles
             '&:hover': {
               borderWidth: '2px',
-              borderColor: 'theme.palette.primary.main',
             },
 
             // Active styles
             '&:active': {
               borderWidth: '2px',
-              borderColor: 'theme.palette.primary.main',
             },
 
             // Focus styles
             '&:focus': {
               borderWidth: '2px',
-              borderColor: 'theme.palette.primary.main',
             },
-
-            // Add other styles as needed
           },
         },
       },
     },
   });
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+
+      {children}
+    </ThemeProvider>
+  );
 }

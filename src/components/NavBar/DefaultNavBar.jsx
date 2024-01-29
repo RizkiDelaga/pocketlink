@@ -24,6 +24,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import LanguageIcon from '@mui/icons-material/Language';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 // Navbar configuration
 const AppBar = styled(MuiAppBar, {
@@ -117,7 +119,15 @@ export default function DefaultNavBar() {
                 />
               </Box>
               {/* Change Theme Mode */}
-              <Switch onChange={toggleThemeMode} color="primary" />
+              <Switch
+                checked={themeMode === 'light' ? true : false}
+                icon={<LightModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />}
+                checkedIcon={
+                  <DarkModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />
+                }
+                onChange={toggleThemeMode}
+                name="themeSwitch"
+              />
             </Box>
 
             {!localStorage.getItem('accessToken') ? (
@@ -221,7 +231,17 @@ export default function DefaultNavBar() {
                   }}
                 />
                 <ListItemIcon sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Switch onChange={toggleThemeMode} color="primary" />
+                  <Switch
+                    checked={themeMode === 'light' ? true : false}
+                    icon={
+                      <LightModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />
+                    }
+                    checkedIcon={
+                      <DarkModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />
+                    }
+                    onChange={toggleThemeMode}
+                    name="themeSwitch"
+                  />
                 </ListItemIcon>
               </ListItemButton>
             </ListItem>

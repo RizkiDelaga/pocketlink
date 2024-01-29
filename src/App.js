@@ -117,10 +117,10 @@ function App() {
 
             <Route element={<DefaultLayout />}>
               <Route path="" element={<Home />}/>
-                <Route path="LoginProcess" element={<LoginProcess />}/>
-                <Route path="PageNotFound" element={<PageNotFound />}/>
+              <Route path="PageNotFound" element={<PageNotFound />}/>
             </Route>
               
+            <Route path="LoginProcess" element={<LoginProcess />}/>
 
             <Route path="Quill" element={<Quill />}/>
             <Route path="Quill2" element={<Quill2 />}/>

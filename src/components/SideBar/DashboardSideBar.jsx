@@ -23,6 +23,8 @@ import QrCode2Icon from '@mui/icons-material/QrCode2';
 import ViewDayIcon from '@mui/icons-material/ViewDay';
 import ThemeModeContext from '../../provider/contexts/ThemeMode';
 import LanguageIcon from '@mui/icons-material/Language';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const drawerWidth = 300;
 
@@ -209,7 +211,17 @@ export default function DashboardSideBar(props) {
                       color: 'primary.main',
                     }}
                   >
-                    <Switch onChange={toggleThemeMode} />
+                    <Switch
+                      checked={themeMode === 'light' ? true : false}
+                      icon={
+                        <LightModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />
+                      }
+                      checkedIcon={
+                        <DarkModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />
+                      }
+                      onChange={toggleThemeMode}
+                      name="themeSwitch"
+                    />
                   </ListItemIcon>
                 </ListItemButton>
               </Tooltip>

@@ -120,6 +120,7 @@ export default function DefaultNavBar() {
               </Box>
               {/* Change Theme Mode */}
               <Switch
+                color={scrollPosition >= 70 ? (themeMode === 'light' ? 'light' : 'primary') : 'primary'}
                 checked={themeMode === 'light' ? true : false}
                 icon={<LightModeIcon fontSize="small" color="primary" sx={{ bgcolor: 'white', borderRadius: 100 }} />}
                 checkedIcon={

@@ -14,13 +14,13 @@ import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
 import DashboardLayout from './layouts/DashboardLayout';
 import DefaultLayout from './layouts/DefaultLayout';
-import LoginProcess from './pages/Auth/LoginProcess';
 import SSOAuthentication from './pages/Auth/SSOAuthentication';
 import Profile from './pages/Dashboard/Profile/Profile';
 import Notifications from './pages/Dashboard/Notifications/Notifications';
 import Settings from './pages/Dashboard/Settings/Settings';
 import ActiveSubscription from './pages/Dashboard/ActiveSubscription/ActiveSubscription';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
+import SSOProcess from './pages/Auth/SSOProcess';
   
 function App() {
 
@@ -77,18 +77,6 @@ function App() {
       // Handle other errors as needed
     }
   };
-  
-  const SSOValidation = () => {
-    if (localStorage.getItem('accessToken')) {
-      // Validasi Token by API
-      if (true) {
-        // window.location.href =``
-        return null
-      } else {
-        return <Navigate to={`/SSOAuthentication?tokenStatus=expired`} />
-      }
-    }
-  }
 
   return (
     <ThemeModeComponent>
@@ -117,10 +105,10 @@ function App() {
 
             <Route element={<DefaultLayout />}>
               <Route path="" element={<Home />}/>
-              <Route path="PageNotFound" element={<PageNotFound />}/>
             </Route>
+              <Route path="PageNotFound" element={<PageNotFound />}/>
               
-            <Route path="LoginProcess" element={<LoginProcess />}/>
+            <Route path="SSOProcess" element={<SSOProcess />}/>
 
             <Route path="Quill" element={<Quill />}/>
             <Route path="Quill2" element={<Quill2 />}/>
@@ -145,6 +133,3 @@ export default App;
 // 4. Page 404
 // 5. Awevers Project (Next JS)
 // 6. Masterpad (React JS)
-
-// Request Backend:
-// 1. Endpoint Token Status (Is Expired)

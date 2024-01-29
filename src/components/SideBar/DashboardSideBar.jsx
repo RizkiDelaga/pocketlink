@@ -9,22 +9,20 @@ import {
   ListItemText,
   Switch,
   Tooltip,
-  Typography,
   Zoom,
 } from '@mui/material';
-import React, { createContext, useContext } from 'react';
+import React, { useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiDrawer from '@mui/material/Drawer';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { Link, useNavigate } from 'react-router-dom';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LinkIcon from '@mui/icons-material/Link';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 import ViewDayIcon from '@mui/icons-material/ViewDay';
 import ThemeModeContext from '../../provider/contexts/ThemeMode';
+import LanguageIcon from '@mui/icons-material/Language';
 
 const drawerWidth = 300;
 
@@ -88,6 +86,7 @@ export default function DashboardSideBar(props) {
   return (
     <>
       <Drawer variant="permanent" open={props.openSidebar} style={{ backgroundColor: theme.palette.primary.main }}>
+        {/* Header Logo */}
         <DrawerHeader sx={{ border: 'none', display: 'flex', justifyContent: 'center' }}>
           <img
             src={'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg'}
@@ -111,6 +110,7 @@ export default function DashboardSideBar(props) {
           </IconButton>
         </DrawerHeader>
 
+        {/* List of Sidebar Menu */}
         <List
           sx={{
             display: 'flex',
@@ -145,6 +145,7 @@ export default function DashboardSideBar(props) {
                         placement="right"
                         color="primary.main"
                         TransitionComponent={Zoom}
+                        disableHoverListener={props.openSidebar}
                         arrow
                       >
                         <ListItemButton
@@ -172,7 +173,11 @@ export default function DashboardSideBar(props) {
             })}
           </Box>
 
+          {/* Change Default System Configuration */}
           <Box>
+            <Divider variant="middle" />
+
+            {/* Change Theme Mode */}
             <ListItem
               disablePadding
               sx={{
@@ -180,7 +185,14 @@ export default function DashboardSideBar(props) {
                 color: 'primary.main',
               }}
             >
-              <Tooltip title="Theme Mode" placement="right" color="primary.main" TransitionComponent={Zoom} arrow>
+              <Tooltip
+                title="Theme Mode"
+                placement="right"
+                color="primary.main"
+                TransitionComponent={Zoom}
+                disableHoverListener={props.openSidebar}
+                arrow
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -203,6 +215,7 @@ export default function DashboardSideBar(props) {
               </Tooltip>
             </ListItem>
 
+            {/* Change Language */}
             <ListItem
               disablePadding
               sx={{
@@ -210,7 +223,14 @@ export default function DashboardSideBar(props) {
                 color: 'primary.main',
               }}
             >
-              <Tooltip title="Language" placement="right" color="primary.main" TransitionComponent={Zoom} arrow>
+              <Tooltip
+                title="Language"
+                placement="right"
+                color="primary.main"
+                TransitionComponent={Zoom}
+                disableHoverListener={props.openSidebar}
+                arrow
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -226,10 +246,7 @@ export default function DashboardSideBar(props) {
                       color: 'primary.main',
                     }}
                   >
-                    <Avatar
-                      src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                      sx={{ width: 32, height: 32 }}
-                    />
+                    <LanguageIcon />
                   </ListItemIcon>
                 </ListItemButton>
               </Tooltip>

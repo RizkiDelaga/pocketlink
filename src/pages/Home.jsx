@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <>
-      <Paper elevation={0} sx={{ height: '1700px' }}>
+      <Paper elevation={0} sx={{ height: '1000px' }}>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione eos, temporibus repellat quisquam numquam
         minima blanditiis consectetur iusto impedit officiis excepturi non eveniet tenetur? Voluptatum quisquam nostrum
         placeat dicta quos.

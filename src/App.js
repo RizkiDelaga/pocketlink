@@ -13,10 +13,14 @@ import PageNotFound404 from './pages/PageNotFound404';
 import LinkPage from './pages/dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
-import DashboardLayout from './layout/DashboardLayout';
-import DefaultLayout from './layout/DefaultLayout';
+import DashboardLayout from './layouts/DashboardLayout';
+import DefaultLayout from './layouts/DefaultLayout';
 import LoginProcess from './pages/auth/LoginProcess';
 import SSOAuthentication from './pages/auth/SSOAuthentication';
+import Profile from './pages/dashboard/Profile/Profile';
+import Notifications from './pages/dashboard/Notifications/Notifications';
+import Settings from './pages/dashboard/Settings/Settings';
+import ActiveSubscription from './pages/dashboard/ActiveSubscription/ActiveSubscription';
 
 function App() {
 
@@ -91,19 +95,18 @@ function App() {
       <ThemeProviderComponent>
         <BrowserRouter>
           <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route path="" element={<Home />}/>
-                <Route path="LoginProcess" element={<LoginProcess />}/>
-                <Route path="PageNotFound" element={<PageNotFound404 />}/>
-
-                <Route element={<HandleLoginSuccessfully />}>
-                  <Route path="SSOAuthentication" element={<SSOAuthentication/>}/>
-                </Route>
+            <Route element={<HandleLoginSuccessfully />}>
+              <Route path="SSOAuthentication" element={<SSOAuthentication/>}/>
             </Route>
-              
+            
             <Route element={<ProtectedRoute />}>
               <Route element={<DashboardLayout />}>
                 <Route path="Dashboard" element={<Dashboard />}/>
+                <Route path="Dashboard/Profile" element={<Profile />}/>
+                <Route path="Dashboard/Notifications" element={<Notifications />} />
+                <Route path="Dashboard/Settings" element={<Settings />} />
+                <Route path="Dashboard/ActiveSubscription" element={<ActiveSubscription />} />
+
                 <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
                 <Route path="Dashboard/QRCode" element={<QRCode/>}/>
                 <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
@@ -111,6 +114,13 @@ function App() {
                 <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
               </Route>
             </Route>
+
+            <Route element={<DefaultLayout />}>
+              <Route path="" element={<Home />}/>
+                <Route path="LoginProcess" element={<LoginProcess />}/>
+                <Route path="PageNotFound" element={<PageNotFound404 />}/>
+            </Route>
+              
 
             <Route path="Quill" element={<Quill />}/>
             <Route path="Quill2" element={<Quill2 />}/>

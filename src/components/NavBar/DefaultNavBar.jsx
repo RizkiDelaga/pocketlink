@@ -10,23 +10,20 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Menu,
-  MenuItem,
   Switch,
   Toolbar,
 } from '@mui/material';
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import { useNavigate } from 'react-router-dom';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PasswordIcon from '@mui/icons-material/Password';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ThemeModeContext from '../../provider/contexts/ThemeMode';
 import CloseIcon from '@mui/icons-material/Close';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import LanguageIcon from '@mui/icons-material/Language';
 
 // Navbar configuration
 const AppBar = styled(MuiAppBar, {
@@ -47,15 +44,6 @@ export default function DefaultNavBar() {
   const [scrollPosition, setScrollPosition] = useState(window.screenY);
   const [openMobileMenu, setOpenMobileMenu] = React.useState(false);
 
-  // Open Account Menu
-  const [openMyAccount, setOpenMyAccount] = React.useState(false);
-  const handleCloseAccountMenu = (linkDirection) => {
-    if (linkDirection) {
-      navigate(linkDirection);
-    }
-    setOpenMyAccount(null);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
@@ -63,10 +51,8 @@ export default function DefaultNavBar() {
 
     // Set initial scroll position
     setScrollPosition(window.scrollY);
-
     // Add event listener for scroll
     window.addEventListener('scroll', handleScroll);
-
     // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -85,7 +71,7 @@ export default function DefaultNavBar() {
       >
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Icon Mobile Menu */}
+            {/* Open Mobile Menu Icon */}
             <IconButton
               edge="start"
               onClick={() => setOpenMobileMenu(true)}
@@ -95,9 +81,10 @@ export default function DefaultNavBar() {
                 marginRight: 2,
               }}
             >
-              <MenuIcon sx={{ fontSize: 32 }} />
+              <MenuIcon fontSize="large" />
             </IconButton>
 
+            {/* Logo */}
             <img
               height={30}
               src={'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg'}
@@ -105,6 +92,7 @@ export default function DefaultNavBar() {
               alt="Logo"
             />
 
+            {/* Header Navigation */}
             <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },
@@ -119,124 +107,50 @@ export default function DefaultNavBar() {
           </div>
 
           <Box sx={{ display: 'flex' }}>
+            {/* Change Default System Configuration */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Switch onChange={toggleThemeMode} color="primary" />
+              {/* Change Language */}
               <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-                <Avatar
-                  src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                  sx={{ width: 32, height: 32 }}
+                <LanguageIcon
+                  fontSize="large"
+                  color={scrollPosition >= 70 ? (themeMode === 'light' ? 'light' : 'primary') : 'primary'}
                 />
               </Box>
+              {/* Change Theme Mode */}
+              <Switch onChange={toggleThemeMode} color="primary" />
             </Box>
 
             {!localStorage.getItem('accessToken') ? (
-              <Button
-                variant="outlined"
-                size="small"
-                color={scrollPosition >= 70 ? (themeMode === 'light' ? 'inherit' : 'primary') : 'primary'}
-                sx={{ ml: 2 }}
-              >
-                Login
-              </Button>
+              <>
+                {/* Direct Login */}
+                <Button
+                  variant="outlined"
+                  size="small"
+                  color={scrollPosition >= 70 ? (themeMode === 'light' ? 'inherit' : 'primary') : 'primary'}
+                  onClick={() => navigate('/SSOAuthentication')}
+                  sx={{ ml: 2 }}
+                >
+                  Login
+                </Button>
+              </>
             ) : (
               <>
+                {/* Open Notification Icon */}
                 <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-                  <Avatar
-                    src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                    sx={{ width: 32, height: 32 }}
+                  <CircleNotificationsIcon
+                    fontSize="large"
+                    color={scrollPosition >= 70 ? (themeMode === 'light' ? 'light' : 'primary') : 'primary'}
                   />
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-                  {/* Account Menu */}
-                  <IconButton
-                    color="inherit"
-                    onClick={(event) => {
-                      setOpenMyAccount(event.currentTarget);
-                    }}
-                    sx={{ padding: 0 }}
-                  >
-                    <Avatar
-                      src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                      sx={{ width: 32, height: 32 }}
-                    />
-                  </IconButton>
 
-                  <Menu
-                    anchorEl={openMyAccount}
-                    open={openMyAccount}
-                    onClose={() => handleCloseAccountMenu()}
-                    PaperProps={{
-                      elevation: 0,
-                      sx: {
-                        minWidth: '280px',
-                        maxWidth: '300px',
-                        borderRadius: '16px',
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 0.5,
-                      },
-                    }}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        marginLeft: '16px',
-                        marginRight: '16px',
-                      }}
-                    >
-                      <Avatar
-                        src={
-                          'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'
-                        }
-                        sx={{ marginRight: 1.5 }}
-                      />
-                      <div style={{ width: 'fit-content' }}>
-                        <div style={{ fontWeight: 'bold', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>asd</div>
-                      </div>
-                    </div>
-
-                    <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard')}>
-                      <ListItemIcon>
-                        <DashboardOutlinedIcon />
-                      </ListItemIcon>
-                      Dashboard Admin
-                    </MenuItem>
-                    <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard/EditProfil')}>
-                      <ListItemIcon>
-                        <ManageAccountsIcon />
-                      </ListItemIcon>
-                      Edit Profil
-                    </MenuItem>
-                    <MenuItem onClick={() => handleCloseAccountMenu('Dashboard/UbahPassword')}>
-                      <ListItemIcon>
-                        <PasswordIcon />
-                      </ListItemIcon>
-                      Ubah Password
-                    </MenuItem>
-
-                    <Divider />
-                    <MenuItem
-                      onClick={() => {
-                        localStorage.removeItem('access_token');
-                        handleCloseAccountMenu('/');
-                      }}
-                    >
-                      <ListItemIcon>
-                        <ExitToAppIcon />
-                      </ListItemIcon>
-                      Keluar
-                    </MenuItem>
-                  </Menu>
-                </Box>
+                {/* Open Profile Menu Icon */}
+                <ProfileMenu />
               </>
             )}
           </Box>
         </Toolbar>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Dialog Component */}
         <Dialog
           fullScreen="xs"
           open={openMobileMenu}
@@ -245,16 +159,19 @@ export default function DefaultNavBar() {
           aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* Header Logo */}
             <img
               height={40}
               src={'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg'}
               alt="Logo"
             />
+            {/* Close Dialog */}
             <IconButton color="primary" onClick={() => setOpenMobileMenu(false)}>
               <CloseIcon sx={{ fontSize: '30px' }} />
             </IconButton>
           </DialogTitle>
 
+          {/* List of Navigation Menu */}
           <List>
             <ListItem disablePadding onClick={() => setTimeout(() => setOpenMobileMenu(false), 500)}>
               <ListItemButton sx={{ px: 3 }}>
@@ -292,6 +209,8 @@ export default function DefaultNavBar() {
 
             <Divider variant="middle" />
 
+            {/* Change Default System Configuration */}
+            {/* Change Theme Mode */}
             <ListItem disablePadding>
               <ListItemButton sx={{ px: 3 }}>
                 <ListItemText
@@ -306,6 +225,7 @@ export default function DefaultNavBar() {
                 </ListItemIcon>
               </ListItemButton>
             </ListItem>
+            {/* Change Language */}
             <ListItem disablePadding>
               <ListItemButton sx={{ px: 3 }}>
                 <ListItemText
@@ -326,6 +246,7 @@ export default function DefaultNavBar() {
           </List>
 
           <Box sx={{ display: localStorage.getItem('accessToken') ? 'none' : 'flex', mx: 3 }}>
+            {/* Direct Login */}
             <Button variant="outlined" size="medium" color="primary" sx={{ width: '100%' }}>
               Login
             </Button>

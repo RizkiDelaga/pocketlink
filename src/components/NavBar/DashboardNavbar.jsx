@@ -1,15 +1,12 @@
-import { Avatar, Box, Divider, IconButton, Menu, MenuItem, Switch, Toolbar } from '@mui/material';
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { Box, IconButton, Toolbar } from '@mui/material';
+import React, { useContext } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import { useNavigate } from 'react-router-dom';
-import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PasswordIcon from '@mui/icons-material/Password';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ThemeModeContext from '../../provider/contexts/ThemeMode';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const drawerWidth = 300;
 
@@ -36,22 +33,14 @@ const AppBar = styled(MuiAppBar, {
 export default function DashboardNavbar(props) {
   const navigate = useNavigate();
   const theme = useTheme();
-  const { themeMode, toggleThemeMode } = useContext(ThemeModeContext);
-
-  // Open Account Menu
-  const [openMyAccount, setOpenMyAccount] = React.useState(false);
-  const handleCloseAccountMenu = (linkDirection) => {
-    if (linkDirection) {
-      navigate(linkDirection);
-    }
-    setOpenMyAccount(null);
-  };
+  const { themeMode } = useContext(ThemeModeContext);
 
   return (
     <>
       <AppBar position="fixed" open={props.openSidebar} color="primary">
         <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          {/* Open Menu Icon For Sidebar */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <IconButton
               aria-label="open drawer"
               onClick={props.handleSidebar}
@@ -65,100 +54,18 @@ export default function DashboardNavbar(props) {
                 },
               }}
             >
-              <MenuIcon />
+              <MenuIcon fontSize="large" />
             </IconButton>
-          </div>
+          </Box>
+
           <Box sx={{ display: 'flex' }}>
+            {/* Open Notification Icon */}
             <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-              <Avatar
-                src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                sx={{ width: 32, height: 32 }}
-              />
+              <CircleNotificationsIcon fontSize="large" color={themeMode === 'light' ? 'light' : 'primary'} />
             </Box>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', ml: 2 }}>
-              {/* Account Menu */}
-              <IconButton
-                color="inherit"
-                onClick={(event) => {
-                  setOpenMyAccount(event.currentTarget);
-                }}
-                sx={{ padding: 0 }}
-              >
-                <Avatar
-                  src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                  sx={{ width: 32, height: 32 }}
-                />
-              </IconButton>
-
-              <Menu
-                anchorEl={openMyAccount}
-                open={openMyAccount}
-                onClose={() => handleCloseAccountMenu()}
-                PaperProps={{
-                  elevation: 0,
-                  sx: {
-                    minWidth: '280px',
-                    maxWidth: '300px',
-                    borderRadius: '16px',
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: 0.5,
-                  },
-                }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginLeft: '16px',
-                    marginRight: '16px',
-                  }}
-                >
-                  <Avatar
-                    src={'https://img.freepik.com/free-vector/superhero-character-with-pop-art-style_197582-180.jpg'}
-                    sx={{ marginRight: 1.5 }}
-                  />
-                  <div style={{ width: 'fit-content' }}>
-                    <div style={{ fontWeight: 'bold', wordWrap: 'break-word', whiteSpace: 'pre-wrap' }}>asd</div>
-                  </div>
-                </div>
-
-                <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard')}>
-                  <ListItemIcon>
-                    <DashboardOutlinedIcon />
-                  </ListItemIcon>
-                  Dashboard Admin
-                </MenuItem>
-                <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard/EditProfil')}>
-                  <ListItemIcon>
-                    <ManageAccountsIcon />
-                  </ListItemIcon>
-                  Edit Profil
-                </MenuItem>
-                <MenuItem onClick={() => handleCloseAccountMenu('Dashboard/UbahPassword')}>
-                  <ListItemIcon>
-                    <PasswordIcon />
-                  </ListItemIcon>
-                  Ubah Password
-                </MenuItem>
-
-                <Divider />
-                <MenuItem
-                  onClick={() => {
-                    localStorage.removeItem('access_token');
-                    handleCloseAccountMenu('/');
-                  }}
-                >
-                  <ListItemIcon>
-                    <ExitToAppIcon />
-                  </ListItemIcon>
-                  Keluar
-                </MenuItem>
-              </Menu>
-            </Box>
+            {/* Open Profile Menu Icon */}
+            <ProfileMenu />
           </Box>
         </Toolbar>
       </AppBar>

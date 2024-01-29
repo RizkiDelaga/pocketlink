@@ -9,7 +9,6 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import PageViewer from './pages/PageViewer/PageViewer';
 import ThemeModeComponent from './provider/components/ThemeModeComponent';
 import ThemeProviderComponent from './provider/components/ThemeProviderComponent';
-import PageNotFound404 from './pages/PageNotFound404';
 import LinkPage from './pages/Dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
@@ -21,6 +20,7 @@ import Profile from './pages/Dashboard/Profile/Profile';
 import Notifications from './pages/Dashboard/Notifications/Notifications';
 import Settings from './pages/Dashboard/Settings/Settings';
 import ActiveSubscription from './pages/Dashboard/ActiveSubscription/ActiveSubscription';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
   
 function App() {
 
@@ -118,7 +118,7 @@ function App() {
             <Route element={<DefaultLayout />}>
               <Route path="" element={<Home />}/>
                 <Route path="LoginProcess" element={<LoginProcess />}/>
-                <Route path="PageNotFound" element={<PageNotFound404 />}/>
+                <Route path="PageNotFound" element={<PageNotFound />}/>
             </Route>
               
 

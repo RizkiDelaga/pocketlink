@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Container } from '@mui/material';
 
-function PageNotFound404() {
+function PageNotFound() {
   return (
     <Container
       style={{
@@ -32,4 +32,4 @@ function PageNotFound404() {
   );
 }
 
-export default PageNotFound404;
+export default PageNotFound;

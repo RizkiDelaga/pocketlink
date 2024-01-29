@@ -1,27 +1,27 @@
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router';
 import Home from "./pages/Home";
-import QRCode from "./pages/dashboard/QRCode/QRCode";
+import QRCode from "./pages/Dashboard/QRCode/QRCode";
 import axios from "axios";
 import { BrowserRouter } from 'react-router-dom';
-import CreateLinkPage from './pages/dashboard/LinkPage/CreateLinkPage';
-import ShortLink from './pages/dashboard/ShortLink/ShortLink';
-import Dashboard from './pages/dashboard/Dashboard';
+import CreateLinkPage from './pages/Dashboard/LinkPage/CreateLinkPage';
+import ShortLink from './pages/Dashboard/ShortLink/ShortLink';
+import Dashboard from './pages/Dashboard/Dashboard';
 import PageViewer from './pages/PageViewer/PageViewer';
 import ThemeModeComponent from './provider/components/ThemeModeComponent';
 import ThemeProviderComponent from './provider/components/ThemeProviderComponent';
 import PageNotFound404 from './pages/PageNotFound404';
-import LinkPage from './pages/dashboard/LinkPage/LinkPage';
+import LinkPage from './pages/Dashboard/LinkPage/LinkPage';
 import Quill from './pages/Quill';
 import Quill2 from './pages/Quill2';
 import DashboardLayout from './layouts/DashboardLayout';
 import DefaultLayout from './layouts/DefaultLayout';
-import LoginProcess from './pages/auth/LoginProcess';
-import SSOAuthentication from './pages/auth/SSOAuthentication';
-import Profile from './pages/dashboard/Profile/Profile';
-import Notifications from './pages/dashboard/Notifications/Notifications';
-import Settings from './pages/dashboard/Settings/Settings';
-import ActiveSubscription from './pages/dashboard/ActiveSubscription/ActiveSubscription';
-
+import LoginProcess from './pages/Auth/LoginProcess';
+import SSOAuthentication from './pages/Auth/SSOAuthentication';
+import Profile from './pages/Dashboard/Profile/Profile';
+import Notifications from './pages/Dashboard/Notifications/Notifications';
+import Settings from './pages/Dashboard/Settings/Settings';
+import ActiveSubscription from './pages/Dashboard/ActiveSubscription/ActiveSubscription';
+  
 function App() {
 
   const HandleLoginSuccessfully = () => {

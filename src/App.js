@@ -21,6 +21,7 @@ import Settings from './pages/Dashboard/Settings/Settings';
 import ActiveSubscription from './pages/Dashboard/ActiveSubscription/ActiveSubscription';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
 import SSOProcess from './pages/Auth/SSOProcess';
+import AlertComponent from './provider/components/AlertComponent';
   
 function App() {
 
@@ -81,55 +82,49 @@ function App() {
   return (
     <ThemeModeComponent>
       <ThemeProviderComponent>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<HandleLoginSuccessfully />}>
-              <Route path="SSOAuthentication" element={<SSOAuthentication/>}/>
-            </Route>
-            
-            <Route element={<ProtectedRoute />}>
-              <Route element={<DashboardLayout />}>
-                <Route path="Dashboard" element={<Dashboard />}/>
-                <Route path="Dashboard/Profile" element={<Profile />}/>
-                <Route path="Dashboard/Notifications" element={<Notifications />} />
-                <Route path="Dashboard/Settings" element={<Settings />} />
-                <Route path="Dashboard/ActiveSubscription" element={<ActiveSubscription />} />
+        <AlertComponent>
+          <BrowserRouter>
 
-                <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
-                <Route path="Dashboard/QRCode" element={<QRCode/>}/>
-                <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
-                <Route path="Dashboard/LinkPage/CreteLinkPage" element={<CreateLinkPage />}/>
-                <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
+            <Routes>
+              <Route element={<HandleLoginSuccessfully />}>
+                <Route path="SSOAuthentication" element={<SSOAuthentication/>}/>
               </Route>
-            </Route>
-
-            <Route element={<DefaultLayout />}>
-              <Route path="" element={<Home />}/>
-            </Route>
-              <Route path="PageNotFound" element={<PageNotFound />}/>
               
-            <Route path="SSOProcess" element={<SSOProcess />}/>
+              <Route element={<ProtectedRoute />}>
+                <Route element={<DashboardLayout />}>
+                  <Route path="Dashboard" element={<Dashboard />}/>
+                  <Route path="Dashboard/Profile" element={<Profile />}/>
+                  <Route path="Dashboard/Notifications" element={<Notifications />} />
+                  <Route path="Dashboard/Settings" element={<Settings />} />
+                  <Route path="Dashboard/ActiveSubscription" element={<ActiveSubscription />} />
 
-            <Route path="Quill" element={<Quill />}/>
-            <Route path="Quill2" element={<Quill2 />}/>
+                  <Route path="Dashboard/ShortLink" element={<ShortLink />}/>
+                  <Route path="Dashboard/QRCode" element={<QRCode/>}/>
+                  <Route path="Dashboard/LinkPage" element={<LinkPage />}/>
+                  <Route path="Dashboard/LinkPage/CreteLinkPage" element={<CreateLinkPage />}/>
+                  <Route path="Dashboard/LinkPage/:pageId" element={"Edit Page"}/>
+                </Route>
+              </Route>
 
-            <Route path="m/*" element={<PageViewer/>}/>
-            <Route path="*" element={<DirectShortLink/>}/>
-            
-          </Routes>
-        </BrowserRouter>
+              <Route element={<DefaultLayout />}>
+                <Route path="" element={<Home />}/>
+              </Route>
+                <Route path="PageNotFound" element={<PageNotFound />}/>
+                
+              <Route path="SSOProcess" element={<SSOProcess />}/>
+
+              <Route path="Quill" element={<Quill />}/>
+              <Route path="Quill2" element={<Quill2 />}/>
+
+              <Route path="m/*" element={<PageViewer/>}/>
+              <Route path="*" element={<DirectShortLink/>}/>
+              
+            </Routes>
+          </BrowserRouter>
+        </AlertComponent>
       </ThemeProviderComponent>
     </ThemeModeComponent>
   );
 }
 
 export default App;
-
-
-// To-Do
-// 1. Make Layout
-// 2. Slicing All Page
-// 3. Coloring Theme
-// 4. Page 404
-// 5. Awevers Project (Next JS)
-// 6. Masterpad (React JS)

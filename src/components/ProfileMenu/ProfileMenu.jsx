@@ -2,11 +2,19 @@ import { Avatar, Box, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '
 import React from 'react';
 import { useNavigate } from 'react-router';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import PasswordIcon from '@mui/icons-material/Password';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { Link } from 'react-router-dom';
+
+import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
+import SettingsApplicationsOutlinedIcon from '@mui/icons-material/SettingsApplicationsOutlined';
+import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
+
+import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
+import GavelOutlinedIcon from '@mui/icons-material/GavelOutlined';
+import LocalPoliceOutlinedIcon from '@mui/icons-material/LocalPoliceOutlined';
+import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
+
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 
 export default function ProfileMenu() {
   const navigate = useNavigate();
@@ -88,9 +96,9 @@ export default function ProfileMenu() {
 
         <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard/Profile')} sx={{ color: 'primary.main' }}>
           <ListItemIcon sx={{ color: 'primary.main' }}>
-            <ManageAccountsIcon />
+            <PortraitOutlinedIcon />
           </ListItemIcon>
-          Your Profile
+          Update Profile
         </MenuItem>
 
         <MenuItem
@@ -98,67 +106,47 @@ export default function ProfileMenu() {
           sx={{ color: 'primary.main' }}
         >
           <ListItemIcon sx={{ color: 'primary.main' }}>
-            <PasswordIcon />
+            <CardMembershipOutlinedIcon />
           </ListItemIcon>
           Active Subscription
         </MenuItem>
 
         <MenuItem onClick={() => handleCloseAccountMenu('/Dashboard/Settings')} sx={{ color: 'primary.main' }}>
           <ListItemIcon sx={{ color: 'primary.main' }}>
-            <PasswordIcon />
+            <SettingsApplicationsOutlinedIcon />
           </ListItemIcon>
           Settings
         </MenuItem>
 
         {/* Second Menu Section */}
         <Divider variant="middle" />
-        <Link to="http://localhost:3000/HelpCenter" target="_blank" rel="noopener noreferrer">
-          <MenuItem sx={{ color: 'primary.main' }}>
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <PasswordIcon />
-            </ListItemIcon>
-            Help Center
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <OpenInNewIcon fontSize="small" />
-            </ListItemIcon>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={() => handleCloseAccountMenu('/HelpCenter')} sx={{ color: 'primary.main' }}>
+          <ListItemIcon sx={{ color: 'primary.main' }}>
+            <HelpCenterOutlinedIcon />
+          </ListItemIcon>
+          Help Center
+        </MenuItem>
 
-        <Link to="http://localhost:3000/TermsOfUse" target="_blank" rel="noopener noreferrer">
-          <MenuItem sx={{ color: 'primary.main' }}>
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <PasswordIcon />
-            </ListItemIcon>
-            Terms of Use
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <OpenInNewIcon fontSize="small" />
-            </ListItemIcon>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={() => handleCloseAccountMenu('/TermsOfUse')} sx={{ color: 'primary.main' }}>
+          <ListItemIcon sx={{ color: 'primary.main' }}>
+            <GavelOutlinedIcon />
+          </ListItemIcon>
+          Terms of Use
+        </MenuItem>
 
-        <Link to="http://localhost:3000/PrivacyPolicy" target="_blank" rel="noopener noreferrer">
-          <MenuItem sx={{ color: 'primary.main' }}>
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <PasswordIcon />
-            </ListItemIcon>
-            Privacy Policy
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <OpenInNewIcon fontSize="small" />
-            </ListItemIcon>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={() => handleCloseAccountMenu('/PrivacyPolicy')} sx={{ color: 'primary.main' }}>
+          <ListItemIcon sx={{ color: 'primary.main' }}>
+            <LocalPoliceOutlinedIcon />
+          </ListItemIcon>
+          Privacy Policy
+        </MenuItem>
 
-        <Link to="http://localhost:3000/Feedback" target="_blank" rel="noopener noreferrer">
-          <MenuItem sx={{ color: 'primary.main' }}>
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <PasswordIcon />
-            </ListItemIcon>
-            Feedback
-            <ListItemIcon sx={{ color: 'primary.main' }}>
-              <OpenInNewIcon fontSize="small" />
-            </ListItemIcon>
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={() => handleCloseAccountMenu('/Feedback')} sx={{ color: 'primary.main' }}>
+          <ListItemIcon sx={{ color: 'primary.main' }}>
+            <FeedbackOutlinedIcon />
+          </ListItemIcon>
+          Feedback
+        </MenuItem>
 
         {/* Third Menu Section */}
         <Divider variant="middle" />
